@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anglais Facile - Apprenez l'anglais étape par étape</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #ef233c;
+            --info: #4895ef;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .logo i {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .btn-solid {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .btn-solid:hover {
+            background: #d90452;
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(67, 97, 238, 0.8), rgba(58, 12, 163, 0.9)), url('https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80') center/cover;
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        /* Niveaux */
+        .levels {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            color: #64748b;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .level-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .level-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .level-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .level-header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .level-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .level-header p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+        
+        .level-body {
+            padding: 1.5rem;
+        }
+        
+        .level-body ul {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .level-body li {
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .level-body li i {
+            color: var(--accent);
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--success);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 1s ease;
+        }
+        
+        .start-btn {
+            width: 100%;
+            padding: 0.8rem;
+            font-size: 1rem;
+        }
+        
+        /* Fonctionnalités */
+        .features {
+            background: white;
+            padding: 4rem 2rem;
+        }
+        
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+}
+        
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            background: #f8f9fa;
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.2);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        /* S'incrire */
+        .cta {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+        
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-col a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-col a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+        
+        /* Modal Login */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            padding: 2rem;
+            position: relative;
+            transform: translateY(-50px);
+            transition: all 0.3s ease;
+        }
+        
+        .modal.show .modal-content {
+            transform: translateY(0);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #adb5bd;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: var(--danger);
+        }
+        
+        .modal h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        .form-footer {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .form-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Dashboard Styles */
+        .dashboard {
+            display: none;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .dashboard-nav {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dashboard-nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .dashboard-nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .dashboard-nav a:hover, .dashboard-nav a.active {
+            background: var(--light);
+            color: var(--primary);
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-card h3 {
+            color: #6c757d;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .level-progress {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .level-progress .progress-bar {
+            flex-grow: 1;
+            margin: 0;
+        }
+        
+        /* Lesson Content */
+        .lesson-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .lesson-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .lesson-header h2 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .lesson-meta {
+            display: flex;
+            gap: 1rem;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .lesson-content {
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .lesson-content h3 {
+            margin: 1.5rem 0 1rem;
+            color: var(--primary);
+        }
+        
+        .exercise {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .exercise-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .exercise h3 {
+            color: var(--dark);
+            margin-bottom: 0;
+        }
+        
+        .exercise-content {
+            margin-top: 1rem;
+        }
+        
+        .quiz-question {
+            margin: 1.5rem 0;
+        }
+        
+        .quiz-options {
+            display: grid;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        
+        .quiz-option {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 0.8rem 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quiz-option:hover {
+            background: #f1f5f9;
+        }
+        
+        .quiz-option.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .quiz-option.correct {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+        
+        .quiz-option.incorrect {
+            background: var(--danger);
+            color: white;
+            border-color: var(--danger);
+        }
+        
+        .exercise-footer {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar, .auth-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .dashboard-nav ul {
+                flex-wrap: wrap;
+                gap: 1rem;
+                justify-content: center;
+            }
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .badge-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .badge-warning {
+            background: var(--warning);
+            color: white;
+        }
+
+        /* Toast notifications */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--dark);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 3000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast-success {
+            background: var(--success);
+        }
+
+        .toast-error {
+            background: var(--danger);
+        }
+
+        .toast i {
+            font-size: 1.5rem;
+        }
+
+        /* Rewards section */
+        .rewards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .reward-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .reward-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .reward-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .reward-card.locked {
+            opacity: 0.5;
+            filter: grayscale(80%);
+        }
+
+        .reward-card.locked .reward-icon {
+            background: #adb5bd;
+        }
+
+        /* Progress chart */
+        .progress-chart {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .chart-container {
+            height: 300px;
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        .milestone {
+            position: absolute;
+            bottom: 0;
+            transform: translateX(-50%);
+            text-align: center;
+            width: 60px;
+        }
+
+        .milestone-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            margin: 0 auto 0.5rem;
+        }
+
+        .milestone.active .milestone-dot {
+            background: var(--accent);
+            transform: scale(1.5);
+        }
+
+        .milestone-label {
+            font-size: 0.8rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Operation successful</span>
+    </div>
+
+    <!-- Page d'accueil -->
+    <div id="homePage">
+        <header>
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-globe"></i>
+                    <span>Anglais Facile</span>
+                </div>
+                
+                <div class="nav-links">
+                    <a href="#" class="active">Accueil</a>
+                    <a href="#" id="navLevels">Niveaux</a>
+                    <a href="#" id="navFeatures">Méthode</a>
+                    <a href="#">À propos</a>
+                </div>
+                
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" id="loginBtn">Connexion</button>
+                    <button class="btn btn-solid" id="registerBtn">S'inscrire</button>
+                </div>
+            </nav>
+        </header>
+        
+        <section class="hero">
+            <div class="hero-content animate__animated animate__fadeIn">
+                <h1>Apprenez l'anglais rapidement et facilement</h1>
+                <p>De A1 à B2 en suivant notre méthode progressive adaptée aux francophones. Théorie, exercices et quiz ludiques pour une immersion complète.</p>
+                
+                <div class="hero-buttons">
+                    <button class="btn btn-solid btn-lg pulse" id="heroStartBtn">Commencer maintenant</button>
+                    <button class="btn btn-outline btn-lg">Voir la méthode</button>
+                </div>
+            </div>
+        </section>
+        
+        <section class="levels">
+            <div class="section-title">
+                <h2>Nos Niveaux d'Apprentissage</h2>
+                <p>Notre programme est conçu pour vous faire progresser pas à pas jusqu'au niveau B2 avec des parcours adaptés à votre rythme.</p>
+            </div>
+            
+            <div class="level-cards">
+                <div class="level-card">
+                    <div class="level-header">
+                        <h3>Débutant A1</h3>
+                        <p>Premiers pas en anglais</p>
+                    </div>
+                    <div class="level-body">
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Vocabulaire de base (500 mots)</li>
+                            <li><i class="fas fa-check-circle"></i> Phrases simples</li>
+                            <li><i class="fas fa-check-circle"></i> Présent simple</li>
+                            <li><i class="fas fa-check-circle"></i> Compréhension basique</li>
+                        </ul>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 10%"></div>
+                        </div>
+                        <button class="btn btn-solid start-btn" data-level="a1">Commencer A1</button>
+                    </div>
+                </div>
+                
+                <div class="level-card">
+                    <div class="level-header">
+                        <h3>Intermédiaire A2</h3>
+                        <p>Base solide en anglais</p>
+                    </div>
+                    <div class="level-body">
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Vocabulaire essentiel (1000 mots)</li>
+                            <li><i class="fas fa-check-circle"></i> Conversations quotidiennes</li>
+                            <li><i class="fas fa-check-circle"></i> Temps du passé</li>
+                            <li><i class="fas fa-check-circle"></i> Compréhension de textes simples</li>
+                        </ul>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <button class="btn btn-outline start-btn" data-level="a2">Commencer A2</button>
+                    </div>
+                </div>
+                
+                <div class="level-card">
+                    <div class="level-header">
+                        <h3>Intermédiaire supérieur B1</h3>
+                        <p>Communication autonome</p>
+                    </div>
+                    <div class="level-body">
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Vocabulaire étendu (2000 mots)</li>
+                            <li><i class="fas fa-check-circle"></i> Expressions idiomatiques</li>
+                            <li><i class="fas fa-check-circle"></i> Futur et conditionnel</li>
+                            <li><i class="fas fa-check-circle"></i> Compréhension de l'essentiel</li>
+                        </ul>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <button class="btn btn-outline start-btn" data-level="b1">Commencer B1</button>
+                    </div>
+                </div>
+                
+                <div class="level-card">
+                    <div class="level-header">
+                        <h3>Avancé B2</h3>
+                        <p>Maîtrise de l'anglais</p>
+                    </div>
+                    <div class="level-body">
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Vocabulaire avancé (4000 mots)</li>
+                            <li><i class="fas fa-check-circle"></i> Discussions complexes</li>
+                            <li><i class="fas fa-check-circle"></i> Nuances grammaticales</li>
+                            <li><i class="fas fa-check-circle"></i> Compréhension approfondie</li>
+                        </ul>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <button class="btn btn-outline start-btn" data-level="b2">Commencer B2</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="features">
+            <div class="features-container">
+                <div class="section-title">
+                    <h2>Notre Méthode Innovante</h2>
+                    <p>Une approche scientifique combinée à des techniques ludiques pour un apprentissage efficace et durable.</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card animate__animated animate__fadeInUp">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Adaptative Learning</h3>
+                        <p>Notre système s'adapte à votre niveau et vos difficultés pour vous proposer des exercices personnalisés.</p>
+                    </div>
+                    
+                    <div class="feature-card animate__animated animate__fadeInUp animate__delay-1s">
+                        <div class="feature-icon">
+                            <i class="fas fa-microphone-alt"></i>
+                        </div>
+                        <h3>Reconnaissance Vocale</h3>
+                        <p>Améliorez votre prononciation grâce à notre outil de reconnaissance vocale qui analyse votre accent.</p>
+                    </div>
+                    
+                    <div class="feature-card animate__animated animate__fadeInUp animate__delay-2s">
+                        <div class="feature-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h3>Apprentissage Ludique</h3>
+                        <p>Quiz, jeux et défis pour apprendre en s'amusant et rester motivé tout au long de votre progression.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="cta">
+            <div class="cta-container animate__animated animate__zoomIn">
+                <h2>Prêt à commencer votre voyage linguistique?</h2>
+                <p>Rejoignez plus de 100 000 francophones qui ont appris l'anglais avec notre méthode.</p>
+                <button class="btn btn-solid btn-lg" id="ctaRegisterBtn">S'inscrire gratuitement</button>
+            </div>
+        </section>
+        
+        <footer>
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>Anglais Facile</h3>
+                    <p>La méthode la plus efficace pour apprendre l'anglais quand on est francophone.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Navigation</h3>
+                    <ul>
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#">Niveaux</a></li>
+                        <li><a href="#">Méthode</a></li>
+                        <li><a href="#">À propos</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Ressources</h3>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Grammaire</a></li>
+                        <li><a href="#">Vocabulaire</a></li>
+                        <li><a href="#">Exercices</a></li>
+                        <li><a href="#">Prononciation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Légal</h3>
+                    <ul>
+                        <li><a href="#">Conditions d'utilisation</a></li>
+                        <li><a href="#">Politique de confidentialité</a></li>
+                        <li><a href="#">Mentions légales</a></li>
+                        <li><a href="#">CGV</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Anglais Facile. Tous droits réservés.</p>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Tableau de bord utilisateur -->
+    <div id="dashboardPage" class="dashboard">
+        <div class="dashboard-header">
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar">JD</div>
+                <div>
+                    <h3 id="userName">Jean Dupont</h3>
+                    <p>Niveau actuel: <strong id="currentLevel">A1 (12%)</strong></p>
+                </div>
+            </div>
+            <button class="btn btn-outline" id="logoutBtn">Déconnexion</button>
+        </div>
+        
+        <nav class="dashboard-nav">
+            <ul>
+                <li><a href="#" class="active" data-tab="dashboard">Tableau de bord</a></li>
+                <li><a href="#" data-tab="lessons">Leçons</a></li>
+                <li><a href="#" data-tab="exercises">Exercices</a></li>
+                <li><a href="#" data-tab="progress">Progression</a></li>
+                <li><a href="#" data-tab="rewards">Récompenses</a></li>
+                <li><a href="#" data-tab="settings">Paramètres</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Dashboard Tab -->
+        <div id="dashboardTab">
+            <h2>Votre Progression</h2>
+            <p>Continuez à apprendre là où vous vous êtes arrêté ou choisissez une nouvelle leçon.</p>
+            
+            <div class="stats-container">
+                <div class="stat-card">
+                    <h3>Niveau actuel</h3>
+                    <div class="stat-value" id="statLevel">A1</div>
+                    <div class="level-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="levelProgress" style="width: 12%"></div>
+                        </div>
+                        <span id="levelPercent">12%</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>Leçons complétées</h3>
+                    <div class="stat-value" id="statLessons">3</div>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>Exercices réussis</h3>
+                    <div class="stat-value" id="statExercises">24</div>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>Score moyen</h3>
+                    <div class="stat-value" id="statScore">82%</div>
+                </div>
+            </div>
+            
+            <div class="lesson-container">
+                <div class="lesson-header">
+                    <h2>Continuez votre leçon en cours</h2>
+                    <div class="lesson-meta">
+                        <span><i class="fas fa-book"></i> Leçon 4: Les verbes au présent simple</span>
+                        <span><i class="fas fa-clock"></i> 25 minutes</span>
+                    </div>
+                </div>
+                
+                <p>Cette leçon vous apprendra à utiliser correctement le présent simple en anglais pour parler d'habitudes et de vérités générales.</p>
+                
+                <button class="btn btn-solid" id="continueLessonBtn">Continuer la leçon</button>
+            </div>
+            
+            <div class="lesson-container">
+                <h2>Vos prochaines leçons</h2>
+                
+                <div class="exercise">
+                    <div class="exercise-header">
+                        <h3>Leçon 5: Les articles (a/an/the)</h3>
+                        <span><i class="fas fa-star" style="color: var(--warning);"></i> Important</span>
+                    </div>
+                    <p>Comprenez quand utiliser "a", "an" et "the" en anglais - une des plus grandes difficultés pour les francophones.</p>
+                    <div class="exercise-footer">
+                        <button class="btn btn-solid" data-lesson="5">Commencer</button>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <div class="exercise-header">
+                        <h3>Leçon 6: Poser des questions</h3>
+                        <span><i class="fas fa-clock"></i> 20 minutes</span>
+                    </div>
+                    <p>Apprenez à former des questions en anglais avec les mots interrogatifs (what, where, when, why, how).</p>
+                    <div class="exercise-footer">
+                        <button class="btn btn-solid" data-lesson="6">Commencer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Lessons Tab -->
+        <div id="lessonTab" style="display: none;">
+            <div class="lesson-container">
+                <div class="lesson-header">
+                    <h2 id="lessonTitle">Les verbes au présent simple</h2>
+                    <div class="lesson-meta">
+                        <span><i class="fas fa-book"></i> <span id="lessonNumber">Leçon 4</span> - Module <span id="lessonModule">A1</span></span>
+                        <span><i class="fas fa-clock"></i> <span id="lessonDuration">25</span> minutes</span>
+                    </div>
+                </div>
+                
+                <div class="lesson-content" id="lessonContent">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Exercises Tab -->
+        <div id="exercisesTab" style="display: none;">
+            <div class="lesson-container">
+                <h2>Exercices personnalisés</h2>
+                <p>Pratiquez avec des exercices adaptés à votre niveau et vos difficultés.</p>
+                
+                <div class="exercise">
+                    <div class="exercise-header">
+                        <h3>Exercices de grammaire</h3>
+                        <span class="badge badge-primary">A1</span>
+                    </div>
+                    <p>Révision des concepts grammaticaux vus dans vos leçons récentes.</p>
+                    <div class="exercise-footer">
+                        <button class="btn btn-solid" id="grammarExercisesBtn">Commencer</button>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <div class="exercise-header">
+                        <h3>Exercices de vocabulaire</h3>
+                        <span class="badge badge-primary">A1</span>
+                    </div>
+                    <p>Pratiquez le vocabulaire que vous avez appris et découvrez de nouveaux mots.</p>
+                    <div class="exercise-footer">
+                        <button class="btn btn-solid" id="vocabularyExercisesBtn">Commencer</button>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <div class="exercise-header">
+                        <h3>Exercices d'écoute</h3>
+                        <span class="badge badge-primary">A1</span>
+                    </div>
+                    <p>Améliorez votre compréhension orale avec des dialogues adaptés à votre niveau.</p>
+                    <div class="exercise-footer">
+                        <button class="btn btn-solid" id="listeningExercisesBtn">Commencer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Progress Tab -->
+        <div id="progressTab" style="display: none;">
+            <div class="lesson-container">
+                <h2>Votre Progression</h2>
+                <p>Visualisez vos progrès et voyez comment vous vous améliorez au fil du temps.</p>
+                
+                <div class="progress-chart">
+                    <h3>Votre parcours d'apprentissage</h3>
+                    <p>Vous avez complété <strong id="completedLessonsCount">3</strong> leçons sur <strong>25</strong> dans le niveau A1.</p>
+                    
+                    <div class="chart-container">
+                        <div class="milestone" style="left: 0%;">
+                            <div class="milestone-dot"></div>
+                            <div class="milestone-label">A1</div>
+                        </div>
+                        <div class="milestone" style="left: 25%;">
+                            <div class="milestone-dot"></div>
+                            <div class="milestone-label">A2</div>
+                        </div>
+                        <div class="milestone" style="left: 50%;">
+                            <div class="milestone-dot"></div>
+                            <div class="milestone-label">B1</div>
+                        </div>
+                        <div class="milestone active" style="left: 75%;">
+                            <div class="milestone-dot"></div>
+                            <div class="milestone-label">B2</div>
+                        </div>
+                        <div class="milestone" style="left: 100%;">
+                            <div class="milestone-dot"></div>
+                            <div class="milestone-label">C1</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <div class="exercise-header">
+                        <h3>Statistiques détaillées</h3>
+                    </div>
+                    <div class="exercise-content">
+                        <p><strong>Dernière leçon complétée:</strong> <span id="lastLessonDate">12/06/2023</span></p>
+                        <p><strong>Temps total d'apprentissage:</strong> <span id="totalLearningTime">4 heures 32 minutes</span></p>
+                        <p><strong>Score moyen des quiz:</strong> <span id="averageQuizScore">82%</span></p>
+                        <p><strong>Mots de vocabulaire maîtrisés:</strong> <span id="vocabularyMastered">124</span> sur 500</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Rewards Tab -->
+        <div id="rewardsTab" style="display: none;">
+            <div class="lesson-container">
+                <h2>Vos Récompenses</h2>
+                <p>Gagnez des badges en complétant des leçons et en atteignant des objectifs.</p>
+                
+                <div class="rewards-grid">
+                    <div class="reward-card">
+                        <div class="reward-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h4>Premiers pas</h4>
+                        <p>Complétez votre première leçon</p>
+                        <span class="badge badge-success">Obtenu</span>
+                    </div>
+                    
+                    <div class="reward-card">
+                        <div class="reward-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <h4>Série de 5</h4>
+                        <p>5 jours d'apprentissage consécutifs</p>
+                        <span class="badge badge-success">Obtenu</span>
+                    </div>
+                    
+                    <div class="reward-card">
+                        <div class="reward-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h4>Quiz Master</h4>
+                        <p>Score de 100% à un quiz</p>
+                        <span class="badge badge-warning">En cours</span>
+                    </div>
+                    
+                    <div class="reward-card locked">
+                        <div class="reward-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h4>Niveau A1</h4>
+                        <p>Complétez le niveau A1</p>
+                        <span class="badge">Verrouillé</span>
+                    </div>
+                    
+                    <div class="reward-card locked">
+                        <div class="reward-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h4>Vocabulaire 500</h4>
+                        <p>Maîtrisez 500 mots de vocabulaire</p>
+                        <span class="badge">Verrouillé</span>
+                    </div>
+                    
+                    <div class="reward-card locked">
+                        <div class="reward-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h4>Express</h4>
+                        <p>Complétez une leçon en moins de 15 minutes</p>
+                        <span class="badge">Verrouillé</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Settings Tab -->
+        <div id="settingsTab" style="display: none;">
+            <div class="lesson-container">
+                <h2>Paramètres</h2>
+                <p>Personnalisez votre expérience d'apprentissage.</p>
+                
+                <div class="exercise">
+                    <div class="exercise-header">
+                        <h3>Profil</h3>
+                    </div>
+                    <div class="exercise-content">
+                        <div class="form-group">
+                            <label for="settingsName">Nom complet</label>
+                            <input type="text" id="settingsName" class="form-control" value="Jean Dupont">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="settingsEmail">Email</label>
+                            <input type="email" id="settingsEmail" class="form-control" value="jean.dupont@example.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="settingsLevel">Niveau actuel</label>
+                            <select id="settingsLevel" class="form-control">
+                                <option value="a0">Débutant complet (A0)</option>
+                                <option value="a1" selected>Débutant (A1)</option>
+                                <option value="a2">Intermédiaire (A2)</option>
+                                <option value="b1">Intermédiaire supérieur (B1)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="exercise-footer">
+                        <button class="btn btn-solid" id="saveProfileBtn">Enregistrer</button>
+                    </div>
+                </div>
+                
+                <div class="exercise">
+                    <div class="exercise-header">
+                        <h3>Préférences d'apprentissage</h3>
+                    </div>
+                    <div class="exercise-content">
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="dailyReminder" checked> Recevoir un rappel quotidien
+                            </label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dailyGoal">Objectif quotidien (minutes)</label>
+                            <input type="number" id="dailyGoal" class="form-control" value="20" min="10" max="120">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="difficulty">Difficulté des exercices</label>
+                            <select id="difficulty" class="form-control">
+                                <option value="easy">Facile</option>
+                                <option value="medium" selected>Moyen</option>
+                                <option value="hard">Difficile</option>
+                                <option value="adaptive">Adaptatif (recommandé)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="exercise-footer">
+                        <button class="btn btn-solid" id="savePreferencesBtn">Enregistrer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal de connexion -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Connexion</h2>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Mot de passe</label>
+                    <input type="password" id="loginPassword" class="form-control" required>
+                </div>
+                
+                <button type="submit" class="btn btn-solid btn-block">Se connecter</button>
+                
+                <div class="form-footer">
+                    <p>Pas encore de compte? <a href="#" id="showRegister">S'inscrire</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Modal d'inscription -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Inscription</h2>
+            
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">Nom complet</label>
+                    <input type="text" id="registerName" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPassword">Mot de passe</label>
+                    <input type="password" id="registerPassword" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerConfirm">Confirmez le mot de passe</label>
+                    <input type="password" id="registerConfirm" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerLevel">Niveau actuel en anglais</label>
+                    <select id="registerLevel" class="form-control">
+                        <option value="a0">Débutant complet (
+</html>
