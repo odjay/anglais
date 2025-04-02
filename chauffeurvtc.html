@@ -3,52 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulaire Chauffeur VTC</title>
+    <title>Formulaire Chauffeur VTC Genève - Export XLS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
+    <style>
+        .required:after {
+            content: " *";
+            color: red;
+        }
+        .file-upload {
+            border: 2px dashed #d1d5db;
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .file-upload:hover {
+            border-color: #3b82f6;
+            background-color: #f8fafc;
+        }
+    </style>
 </head>
-<body>
-    <h1>Formulaire d'Engagement Chauffeur VTC</h1>
-    <form id="vtcForm" method="POST" action="">
-        <label for="nom">Nom complet :</label><br>
-        <input type="text" id="nom" name="nom" required><br><br>
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="bg-blue-600 px-6 py-4">
+                <h1 class="text-2xl font-bold text-white">Formulaire Chauffeur VTC Genève</h1>
+                <p class="text-blue-100 mt-1">Toutes les données seront formatées pour export XLS</p>
+            </div>
 
-        <label for="adresse">Adresse personnelle :</label><br>
-        <input type="text" id="adresse" name="adresse" required><br><br>
+            <form id="vtc-form" class="p-6 space-y-6">
+                <!-- Section 1: Informations personnelles -->
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">
+                        <i class="fas fa-user mr-2 text-blue-500"></i>Informations personnelles
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="lastname" class="block text-sm font-medium text-gray-700 required">Nom</label>
+                            <input type="text" id="lastname" name="lastname" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label for="firstname" class="block text-sm font-medium text-gray-700 required">Prénom</label>
+                            <input type="text" id="firstname" name="firstname" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label for="birthdate" class="block text-sm font-medium text-gray-700 required">Date de naissance</label>
+                            <input type="date" id="birthdate" name="birthdate" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 required">Email</label>
+                            <input type="email" id="email" name="email" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700 required">Téléphone</label>
+                            <input type="tel" id="phone" name="phone" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label for="address" class="block text-sm font-medium text-gray-700 required">Adresse</label>
+                            <input type="text" id="address" name="address" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label for="license_b_date" class="block text-sm font-medium text-gray-700 required">Date obtention permis B</label>
+                            <input type="date" id="license_b_date" name="license_b_date" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                            <p class="text-xs text-gray-500 mt-1">(minimum 3 ans requis)</p>
+                        </div>
+                        <div>
+                            <label for="license_b121" class="block text-sm font-medium text-gray-700 required">Permis B121 (TPP)</label>
+                            <select id="license_b121" name="license_b121" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">-- Sélectionner --</option>
+                                <option value="Oui">Oui</option>
+                                <option value="Non">Non</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="vtc_card" class="block text-sm font-medium text-gray-700 required">Carte VTC</label>
+                            <select id="vtc_card" name="vtc_card" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">-- Sélectionner --</option>
+                                <option value="Oui">Oui</option>
+                                <option value="Non">Non</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="criminal_record" class="block text-sm font-medium text-gray-700 required">Casier judiciaire</label>
+                            <select id="criminal_record" name="criminal_record" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">-- Sélectionner --</option>
+                                <option value="Vierge">Vierge</option>
+                                <option value="Non vierge">Non vierge</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="work_permit" class="block text-sm font-medium text-gray-700 required">Permis de travail</label>
+                            <select id="work_permit" name="work_permit" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">-- Sélectionner --</option>
+                                <option value="Permis G">Permis G</option>
+                                <option value="Permis B">Permis B</option>
+                                <option value="Permis C">Permis C</option>
+                                <option value="Permis L">Permis L</option>
+                                <option value="Citoyen suisse">Citoyen suisse</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
-        <label for="telephone">Téléphone :</label><br>
-        <input type="tel" id="telephone" name="telephone" required><br><br>
+                <!-- Section 2: Documents -->
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">
+                        <i class="fas fa-file-alt mr-2 text-blue-500"></i>Documents à fournir
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 required">Pièce d'identité (recto-verso)</label>
+                            <input type="file" id="id_card" name="id_card" accept=".pdf,.jpg,.jpeg,.png" class="hidden" required>
+                            <label for="id_card" class="file-upload mt-1 block">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-blue-500 mb-2"></i>
+                                <div class="text-sm text-gray-600">Déposer le fichier</div>
+                                <div id="id_card_name" class="text-xs text-gray-500 mt-1 truncate">Aucun fichier sélectionné</div>
+                            </label>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 required">Permis de conduire</label>
+                            <input type="file" id="driving_license" name="driving_license" accept=".pdf,.jpg,.jpeg,.png" class="hidden" required>
+                            <label for="driving_license" class="file-upload mt-1 block">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-blue-500 mb-2"></i>
+                                <div class="text-sm text-gray-600">Déposer le fichier</div>
+                                <div id="driving_license_name" class="text-xs text-gray-500 mt-1 truncate">Aucun fichier sélectionné</div>
+                            </label>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 required">Autorisation de travail</label>
+                            <input type="file" id="work_permit_doc" name="work_permit_doc" accept=".pdf,.jpg,.jpeg,.png" class="hidden" required>
+                            <label for="work_permit_doc" class="file-upload mt-1 block">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-blue-500 mb-2"></i>
+                                <div class="text-sm text-gray-600">Déposer le fichier</div>
+                                <div id="work_permit_doc_name" class="text-xs text-gray-500 mt-1 truncate">Aucun fichier sélectionné</div>
+                            </label>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 required">Certificat médical</label>
+                            <input type="file" id="medical_certificate" name="medical_certificate" accept=".pdf,.jpg,.jpeg,.png" class="hidden" required>
+                            <label for="medical_certificate" class="file-upload mt-1 block">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-blue-500 mb-2"></i>
+                                <div class="text-sm text-gray-600">Déposer le fichier</div>
+                                <div id="medical_certificate_name" class="text-xs text-gray-500 mt-1 truncate">Aucun fichier sélectionné</div>
+                            </label>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 required">Attestation d'assurance</label>
+                            <input type="file" id="insurance" name="insurance" accept=".pdf,.jpg,.jpeg,.png" class="hidden" required>
+                            <label for="insurance" class="file-upload mt-1 block">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-blue-500 mb-2"></i>
+                                <div class="text-sm text-gray-600">Déposer le fichier</div>
+                                <div id="insurance_name" class="text-xs text-gray-500 mt-1 truncate">Aucun fichier sélectionné</div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
 
-        <label for="email">Email :</label><br>
-        <input type="email" id="email" name="email" required><br><br>
+                <!-- Section 3: Validation -->
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">
+                        <i class="fas fa-check-circle mr-2 text-blue-500"></i>Validation
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex items-center h-5">
+                                <input id="consent" name="consent" type="checkbox" required class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded">
+                            </div>
+                            <div class="ml-3 text-sm">
+                                <label for="consent" class="font-medium text-gray-700">Je certifie que toutes les informations fournies sont exactes et complètes.</label>
+                                <p class="text-gray-500">En cochant cette case, vous confirmez votre demande d'inscription comme chauffeur VTC à Genève.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex items-center h-5">
+                                <input id="newsletter" name="newsletter" type="checkbox" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded">
+                            </div>
+                            <div class="ml-3 text-sm">
+                                <label for="newsletter" class="font-medium text-gray-700">Je souhaite recevoir des informations sur les formations VTC</label>
+                                <p class="text-gray-500">(Optionnel) Recevez des informations sur les formations disponibles et les sessions d'examens.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <label for="permis">Numéro de permis B121 :</label><br>
-        <input type="text" id="permis" name="permis" required><br><br>
+                <div class="flex justify-end space-x-3">
+                    <button type="button" id="reset-btn" class="px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Réinitialiser
+                    </button>
+                    <button type="button" id="export-btn" class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                        <i class="fas fa-file-excel mr-2"></i> Exporter en XLS
+                    </button>
+                    <button type="button" id="email-btn" class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        <i class="fas fa-envelope mr-2"></i> Envoyer par email
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-        <label for="carteVTC">Numéro de carte professionnelle VTC :</label><br>
-        <input type="text" id="carteVTC" name="carteVTC" required><br><br>
+    <!-- Modal d'export -->
+    <div id="export-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-medium text-gray-900">Export réussi</h3>
+                <button id="close-export-modal" class="text-gray-400 hover:text-gray-500">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <div class="flex items-center justify-center text-green-500 text-5xl mb-4">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <p class="text-sm text-gray-500">Les données ont été exportées avec succès au format XLS.</p>
+                <div class="bg-blue-50 p-4 rounded-md">
+                    <p class="text-sm text-blue-700">Le fichier a été enregistré sous : <span id="exported-filename" class="font-medium"></span></p>
+                </div>
+            </div>
+            <div class="mt-5 flex justify-end">
+                <button id="ok-export-btn" type="button" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
 
-        <button type="submit">Envoyer</button>
-    </form>
-
-    <!-- Script pour gérer l'envoi -->
     <script>
-        document.getElementById('vtcForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+        // Gestion des noms de fichiers pour l'affichage
+        document.getElementById('id_card').addEventListener('change', function() {
+            document.getElementById('id_card_name').textContent = this.files[0] ? this.files[0].name : 'Aucun fichier sélectionné';
+        });
+        document.getElementById('driving_license').addEventListener('change', function() {
+            document.getElementById('driving_license_name').textContent = this.files[0] ? this.files[0].name : 'Aucun fichier sélectionné';
+        });
+        document.getElementById('work_permit_doc').addEventListener('change', function() {
+            document.getElementById('work_permit_doc_name').textContent = this.files[0] ? this.files[0].name : 'Aucun fichier sélectionné';
+        });
+        document.getElementById('medical_certificate').addEventListener('change', function() {
+            document.getElementById('medical_certificate_name').textContent = this.files[0] ? this.files[0].name : 'Aucun fichier sélectionné';
+        });
+        document.getElementById('insurance').addEventListener('change', function() {
+            document.getElementById('insurance_name').textContent = this.files[0] ? this.files[0].name : 'Aucun fichier sélectionné';
+        });
 
-            const formData = new FormData(event.target);
-            const data = Object.fromEntries(formData.entries());
+        // Réinitialisation du formulaire
+        document.getElementById('reset-btn').addEventListener('click', function() {
+            document.getElementById('vtc-form').reset();
+            document.querySelectorAll('[id$="_name"]').forEach(el => {
+                el.textContent = 'Aucun fichier sélectionné';
+            });
+        });
 
-            // Formatage des données pour l'e-mail
-            const emailBody = `
-                Nom complet : ${data.nom}
-                Adresse personnelle : ${data.adresse}
-                Téléphone : ${data.telephone}
-                Email : ${data.email}
-                Numéro de permis B121 : ${data.permis}
-                Numéro de carte professionnelle VTC : ${data.carteVTC}
-            `;
+        // Export Excel
+        document.getElementById('export-btn').addEventListener('click', function() {
+            if (!document.getElementById('consent').checked) {
+                alert('Veuillez accepter les conditions avant d\'exporter.');
+                return;
+            }
 
-            // Redirection vers une adresse e-mail
-            window.location.href = `mailto:your_email@example.com?subject=Formulaire Chauffeur VTC&body=${encodeURIComponent(emailBody)}`;
+            // Collecter toutes les données du formulaire
+            const formData = new FormData(document.getElementById('vtc-form'));
+            const data = {};
+            
+            for (let [key, value] of formData.entries()) {
+                // Exclure les fichiers de l'export
+                if (!['id_card', 'driving_license', 'work_permit_doc', 'medical_certificate', 'insurance'].includes(key)) {
+                    data[key] = value;
+                }
+            }
+
+            // Ajouter les noms des fichiers
+            data['id_card'] = document.getElementById('id_card').files[0] ? document.getElementById('id_card').files[0].name : 'Non fourni';
+            data['driving_license'] = document.getElementById('driving_license').files[0] ? document.getElementById('driving_license').files[0].name : 'Non fourni';
+            data['work_permit_doc'] = document.getElementById('work_permit_doc').files[0] ? document.getElementById('work_permit_doc').files[0].name : 'Non fourni';
+            data['medical_certificate'] = document.getElementById('medical_certificate').files[0] ? document.getElementById('medical_certificate').files[0].name : 'Non fourni';
+            data['insurance'] = document.getElementById('insurance').files[0] ? document.getElementById('insurance').files[0].name : 'Non fourni';
+            data['export_date'] = new Date().toLocaleString();
+
+            // Créer un worksheet
+            const ws = XLSX.utils.json_to_sheet([data]);
+            
+            // Créer un workbook
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Chauffeur_VTC");
+
+            // Générer un nom de fichier
+            const nom = formData.get('lastname') || 'chauffeur';
+            const prenom = formData.get('firstname') || 'vtc';
+            const filename = `VTC_Genève_${nom}_${prenom}.xlsx`;
+
+            // Exporter
+            XLSX.writeFile(wb, filename);
+
+            // Afficher la modal
+            document.getElementById('exported-filename').textContent = filename;
+            document.getElementById('export-modal').classList.remove('hidden');
+        });
+
+        // Simulation d'envoi par email
+        document.getElementById('email-btn').addEventListener('click', function() {
+            if (!document.getElementById('consent').checked) {
+                alert('Veuillez accepter les conditions avant d\'envoyer.');
+                return;
+            }
+
+            // Ici vous pourriez intégrer un service d'envoi d'email réel
+            // Pour cet exemple, nous allons simplement exporter le XLS et proposer de l'envoyer par email
+            alert('Pour envoyer par email, veuillez d\'abord exporter le fichier XLS puis l\'envoyer manuellement.\n\nUne intégration avec un service email serait possible en production.');
+        });
+
+        // Fermer la modal d'export
+        document.getElementById('close-export-modal').addEventListener('click', function() {
+            document.getElementById('export-modal').classList.add('hidden');
+        });
+        document.getElementById('ok-export-btn').addEventListener('click', function() {
+            document.getElementById('export-modal').classList.add('hidden');
         });
     </script>
 </body>
