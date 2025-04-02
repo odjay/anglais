@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire Chauffeur VTC</title>
+</head>
+<body>
+    <h1>Formulaire d'Engagement Chauffeur VTC</h1>
+    <form id="vtcForm" method="POST" action="">
+        <label for="nom">Nom complet :</label><br>
+        <input type="text" id="nom" name="nom" required><br><br>
+
+        <label for="adresse">Adresse personnelle :</label><br>
+        <input type="text" id="adresse" name="adresse" required><br><br>
+
+        <label for="telephone">Téléphone :</label><br>
+        <input type="tel" id="telephone" name="telephone" required><br><br>
+
+        <label for="email">Email :</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="permis">Numéro de permis B121 :</label><br>
+        <input type="text" id="permis" name="permis" required><br><br>
+
+        <label for="carteVTC">Numéro de carte professionnelle VTC :</label><br>
+        <input type="text" id="carteVTC" name="carteVTC" required><br><br>
+
+        <button type="submit">Envoyer</button>
+    </form>
+
+    <!-- Script pour gérer l'envoi -->
+    <script>
+        document.getElementById('vtcForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+
+            // Formatage des données pour l'e-mail
+            const emailBody = `
+                Nom complet : ${data.nom}
+                Adresse personnelle : ${data.adresse}
+                Téléphone : ${data.telephone}
+                Email : ${data.email}
+                Numéro de permis B121 : ${data.permis}
+                Numéro de carte professionnelle VTC : ${data.carteVTC}
+            `;
+
+            // Redirection vers une adresse e-mail
+            window.location.href = `mailto:your_email@example.com?subject=Formulaire Chauffeur VTC&body=${encodeURIComponent(emailBody)}`;
+        });
+    </script>
+</body>
+</html>
