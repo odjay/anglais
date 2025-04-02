@@ -1,0 +1,353 @@
+ <!DOCTYPE html>
+ <html lang="fr">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulaire Chauffeur VTC Genève - Export XLS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <style>
+  .required:after {
+  content: " *";
+  color: red;
+  }
+  .file-upload {
+  border: 2px dashed #d1d5db;
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  }
+  .file-upload:hover {
+  border-color: #3b82f6;
+  background-color: #f8fafc;
+  }
+  .hidden {
+  display: none;
+  }
+  </style>
+ </head>
+ <body class="bg-gray-50 min-h-screen">
+  <div class="container mx-auto px-4 py-8 max-w-4xl">
+  <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+  <div class="bg-blue-600 px-6 py-4">
+  <h1 class="text-2xl font-bold text-white">Formulaire Chauffeur VTC Genève</h1>
+  <p class="text-blue-100 mt-1">Toutes les données seront formatées pour export XLS</p>
+  </div>
+
+  <form id="vtc-form" class="p-6 space-y-6">
+  <!-- Section 1: Informations personnelles -->
+  <div class="bg-gray-50 p-4 rounded-lg">
+  <h2 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">
+  <i class="fas fa-user mr-2 text-blue-500"></i>Informations personnelles
+  </h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  <div>
+  <label for="lastname" class="block text-sm font-medium text-gray-700 required">Nom</label>
+  <input type="text" id="lastname" name="lastname" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+  </div>
+  <div>
+  <label for="firstname" class="block text-sm font-medium text-gray-700 required">Prénom</label>
+  <input type="text" id="firstname" name="firstname" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+  </div>
+  <div>
+  <label for="birthdate" class="block text-sm font-medium text-gray-700 required">Date de naissance</label>
+  <input type="date" id="birthdate" name="birthdate" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+  </div>
+  <div>
+  <label for="email" class="block text-sm font-medium text-gray-700 required">Email</label>
+  <input type="email" id="email" name="email" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+  </div>
+  <div>
+  <label for="phone" class="block text-sm font-medium text-gray-700 required">Téléphone</label>
+  <input type="tel" id="phone" name="phone" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+  </div>
+  <div>
+  <label for="address" class="block text-sm font-medium text-gray-700 required">Adresse</label>
+  <input type="text" id="address" name="address" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+  </div>
+  <div>
+  <label for="license_b_date" class="block text-sm font-medium text-gray-700 required">Date obtention permis B</label>
+  <input type="date" id="license_b_date" name="license_b_date" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+  <p class="text-xs text-gray-500 mt-1">(minimum 3 ans requis)</p>
+  </div>
+  <div>
+  <label for="license_b121" class="block text-sm font-medium text-gray-700 required">Permis B121 (TPP)</label>
+  <select id="license_b121" name="license_b121" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+  <option value="">-- Sélectionner --</option>
+  <option value="Oui">Oui</option>
+  <option value="Non">Non</option>
+  </select>
+  </div>
+  <div>
+  <label for="vtc_card" class="block text-sm font-medium text-gray-700 required">Carte VTC</label>
+  <select id="vtc_card" name="vtc_card" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+  <option value="">-- Sélectionner --</option>
+  <option value="Oui">Oui</option>
+  <option value="Non">Non</option>
+  </select>
+  </div>
+  <div>
+  <label for="criminal_record" class="block text-sm font-medium text-gray-700 required">Casier judiciaire</label>
+  <select id="criminal_record" name="criminal_record" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+  <option value="">-- Sélectionner --</option>
+  <option value="Vierge">Vierge</option>
+  <option value="Non vierge">Non vierge</option>
+  </select>
+  </div>
+  <div>
+  <label for="work_permit" class="block text-sm font-medium text-gray-700 required">Permis de travail</label>
+  <select id="work_permit" name="work_permit" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+  <option value="">-- Sélectionner --</option>
+  <option value="Permis G">Permis G</option>
+  <option value="Permis B">Permis B</option>
+  <option value="Permis C">Permis C</option>
+  <option value="Permis L">Permis L</option>
+  <option value="Citoyen suisse">Citoyen suisse</option>
+  </select>
+  </div>
+  </div>
+  </div>
+
+  <!-- Section 2: Documents -->
+  <div class="bg-gray-50 p-4 rounded-lg">
+  <h2 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">
+  <i class="fas fa-file-alt mr-2 text-blue-500"></i>Documents à fournir
+  </h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  <div>
+  <label class="block text-sm font-medium text-gray-700 required">Pièce d'identité (recto-verso)</label>
+  <input type="file" id="id_card" name="id_card" accept=".pdf,.jpg,.jpeg,.png" class="hidden" required>
+  <label for="id_card" class="file-upload mt-1 block">
+  <i class="fas fa-cloud-upload-alt text-3xl text-blue-500 mb-2"></i>
+  <div class="text-sm text-gray-600">Déposer le fichier</div>
+  <div id="id_card_name" class="text-xs text-gray-500 mt-1 truncate">Aucun fichier sélectionné</div>
+  </label>
+  </div>
+  <div>
+  <label class="block text-sm font-medium text-gray-700 required">Permis de conduire</label>
+  <input type="file" id="driving_license" name="driving_license" accept=".pdf,.jpg,.jpeg,.png" class="hidden" required>
+  <label for="driving_license" class="file-upload mt-1 block">
+  <i class="fas fa-cloud-upload-alt text-3xl text-blue-500 mb-2"></i>
+  <div class="text-sm text-gray-600">Déposer le fichier</div>
+  <div id="driving_license_name" class="text-xs text-gray-500 mt-1 truncate">Aucun fichier sélectionné</div>
+  </label>
+  </div>
+  <div>
+  <label class="block text-sm font-medium text-gray-700 required">Autorisation de travail</label>
+  <input type="file" id="work_permit_doc" name="work_permit_doc" accept=".pdf,.jpg,.jpeg,.png" class="hidden" required>
+  <label for="work_permit_doc" class="file-upload mt-1 block">
+  <i class="fas fa-cloud-upload-alt text-3xl text-blue-500 mb-2"></i>
+  <div class="text-sm text-gray-600">Déposer le fichier</div>
+  <div id="work_permit_doc_name" class="text-xs text-gray-500 mt-1 truncate">Aucun fichier sélectionné</div>
+  </label>
+  </div>
+  <div>
+  <label class="block text-sm font-medium text-gray-700 required">Certificat médical</label>
+  <input type="file" id="medical_certificate" name="medical_certificate" accept=".pdf,.jpg,.jpeg,.png" class="hidden" required>
+  <label for="medical_certificate" class="file-upload mt-1 block">
+  <i class="fas fa-cloud-upload-alt text-3xl text-blue-500 mb-2"></i>
+  <div class="text-sm text-gray-600">Déposer le fichier</div>
+  <div id="medical_certificate_name" class="text-xs text-gray-500 mt-1 truncate">Aucun fichier sélectionné</div>
+  </label>
+  </div>
+  <div>
+  <label class="block text-sm font-medium text-gray-700 required">Attestation d'assurance</label>
+  <input type="file" id="insurance" name="insurance" accept=".pdf,.jpg,.jpeg,.png" class="hidden" required>
+  <label for="insurance" class="file-upload mt-1 block">
+  <i class="fas fa-cloud-upload-alt text-3xl text-blue-500 mb-2"></i>
+  <div class="text-sm text-gray-600">Déposer le fichier</div>
+  <div id="insurance_name" class="text-xs text-gray-500 mt-1 truncate">Aucun fichier sélectionné</div>
+  </label>
+  </div>
+
+  <div class="col-span-2">
+  <label for="attachment_method" class="block text-sm font-medium text-gray-700 required">Méthode d'inclusion des fichiers</label>
+  <select id="attachment_method" name="attachment_method" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+  <option value="xls">Inclure dans le fichier XLS (pour petits fichiers)</option>
+  <option value="email">Envoyer les fichiers joints par email</option>
+  </select>
+  </div>
+  </div>
+  </div>
+
+  <!-- Section 3: Validation -->
+  <div class="bg-gray-50 p-4 rounded-lg">
+  <h2 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">
+  <i class="fas fa-check-circle mr-2 text-blue-500"></i>Validation
+  </h2>
+
+  <div class="space-y-4">
+  <div class="flex items-start">
+  <div class="flex items-center h-5">
+  <input id="consent" name="consent" type="checkbox" required class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded">
+  </div>
+  <div class="ml-3 text-sm">
+  <label for="consent" class="font-medium text-gray-700">Je certifie que toutes les informations fournies sont exactes et complètes.</label>
+  <p class="text-gray-500">En cochant cette case, vous confirmez votre demande d'inscription comme chauffeur VTC à Genève.</p>
+  </div>
+  </div>
+
+  <div class="flex items-start">
+  <div class="flex items-center h-5">
+  <input id="newsletter" name="newsletter" type="checkbox" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded">
+  </div>
+  <div class="ml-3 text-sm">
+  <label for="newsletter" class="font-medium text-gray-700">Je souhaite recevoir des informations sur les formations VTC</label>
+  <p class="text-gray-500">(Optionnel) Recevez des informations sur les formations disponibles et les sessions d'examens.</p>
+  </div>
+  </div>
+  </div>
+  </div>
+
+  <div class="flex justify-end space-x-3">
+  <button type="button" id="reset-btn" class="px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+  Réinitialiser
+  </button>
+  <button type="submit" id="submit-btn" class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+  Soumettre
+  </button>
+  </div>
+  </form>
+  </div>
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+  // File upload display names
+  const fileInputs = document.querySelectorAll('input[type="file"]');
+  fileInputs.forEach(input => {
+  input.addEventListener('change', function () {
+  const fileNameContainer = document.getElementById(this.id + '_name');
+  if (this.files && this.files.length > 0) {
+  fileNameContainer.textContent = this.files[0].name;
+  } else {
+  fileNameContainer.textContent = "Aucun fichier sélectionné";
+  }
+  });
+  });
+
+  // Reset button functionality
+  document.getElementById('reset-btn').addEventListener('click', function () {
+  document.getElementById('vtc-form').reset();
+  fileInputs.forEach(input => {
+  document.getElementById(input.id + '_name').textContent = "Aucun fichier sélectionné";
+  });
+  });
+
+  // Form submission
+  document.getElementById('vtc-form').addEventListener('submit', async function (event) {
+  event.preventDefault();
+
+  // 1. Upload files to a cloud storage (e.g., Google Cloud Storage, AWS S3)
+  const fileUploadPromises = [];
+  const uploadedFileUrls = {};
+
+  for (const input of fileInputs) {
+  if (input.files && input.files.length > 0) {
+  const file = input.files[0];
+  fileUploadPromises.push(uploadFile(file, input.name)); // Use input.name as identifier
+  }
+  }
+
+  try {
+  const results = await Promise.all(fileUploadPromises);
+  results.forEach(result => {
+  uploadedFileUrls[result.fieldName] = result.fileUrl; // Store URL with field name
+  });
+
+  // 2. Prepare data for IFTTT
+  const formData = new FormData(this);
+  const iftttData = {};
+  for (const pair of formData.entries()) {
+  iftttData[pair[0]] = pair[1];
+  }
+
+  // Include the file URLs
+  Object.assign(iftttData, uploadedFileUrls);
+
+  // 3. Send data to IFTTT Webhook
+  await sendToIFTTT(iftttData);
+
+  alert('Formulaire soumis avec succès!');
+
+  } catch (error) {
+  console.error('Error submitting form:', error);
+  alert('Erreur lors de la soumission du formulaire.');
+  }
+  });
+
+  /**
+  * Uploads a file to Google Cloud Storage.
+  * @param {File} file The file to upload.
+  * @param {string} fieldName The field name associated with the file.
+  * @returns {Promise<{fieldName: string, fileUrl: string}>} Resolves with the field name and the URL of the uploaded file.
+  */
+  async function uploadFile(file, fieldName) {
+  // Replace with your Google Cloud Storage details
+  const projectId = 'your-project-id';
+  const bucketName = 'your-bucket-name';
+  const apiKey = 'your-api-key'; // Consider using backend for security
+
+  const storageUrl = `https://storage.googleapis.com/upload/storage/v1/b/${bucketName}/o?uploadType=media&name=${file.name}`;
+
+  try {
+  const response = await fetch(storageUrl, {
+  method: 'POST',
+  headers: {
+  'Authorization': `Bearer ${apiKey}`, // Ideally, get this from a server
+  'Content-Type': file.type,
+  'X-Upload-Content-Type': file.type,
+  },
+  body: file,
+  });
+
+  if (!response.ok) {
+  throw new Error(`File upload failed: ${response.status} - ${response.statusText}`);
+  }
+
+  const data = await response.json();
+  const fileUrl = `https://storage.googleapis.com/${bucketName}/${file.name}`; // Construct the public URL
+
+  return { fieldName: fieldName, fileUrl: fileUrl };
+
+  } catch (error) {
+  console.error('Error uploading file:', error);
+  throw error; // Re-throw to be caught by the form submission handler
+  }
+  }
+
+  /**
+  * Sends data to IFTTT Webhook.
+  * @param {object} data The data to send to IFTTT.
+  */
+  async function sendToIFTTT(data) {
+  const iftttWebhookURL = 'https://maker.ifttt.com/trigger/{event}/json/with/key/{your_ifttt_key}'; // Replace with your IFTTT Webhook URL
+
+  try {
+  const response = await fetch(iftttWebhookURL.replace('{event}', 'vtc_form_submission').replace('{your_ifttt_key}', 'YOUR_IFTTT_WEBHOOK_KEY'), {
+  method: 'POST',
+  headers: {
+  'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+  throw new Error(`IFTTT request failed: ${response.status} - ${response.statusText}`);
+  }
+
+  } catch (error) {
+  console.error('Error sending to IFTTT:', error);
+  throw error; // Re-throw to be caught by the form submission handler
+  }
+  }
+  });
+ </script>
+ </body>
+ </html>
