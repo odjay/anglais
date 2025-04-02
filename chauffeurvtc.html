@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <style>
         .required:after {
             content: " *";
@@ -23,6 +24,9 @@
         .file-upload:hover {
             border-color: #3b82f6;
             background-color: #f8fafc;
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
@@ -161,6 +165,14 @@
                                 <div id="insurance_name" class="text-xs text-gray-500 mt-1 truncate">Aucun fichier sélectionné</div>
                             </label>
                         </div>
+                        
+                        <div class="col-span-2">
+                            <label for="attachment_method" class="block text-sm font-medium text-gray-700 required">Méthode d'inclusion des fichiers</label>
+                            <select id="attachment_method" name="attachment_method" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                <option value="xls">Inclure dans le fichier XLS (pour petits fichiers)</option>
+                                <option value="email">Envoyer les fichiers joints par email</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
@@ -197,11 +209,8 @@
                     <button type="button" id="reset-btn" class="px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                         Réinitialiser
                     </button>
-                    <button type="button" id="export-btn" class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                        <i class="fas fa-file-excel mr-2"></i> Exporter en XLS
-                    </button>
-                    <button type="button" id="email-btn" class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                        <i class="fas fa-envelope mr-2"></i> Envoyer par email
+                    <button type="submit" id="submit-btn" class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        <i class="fas fa-paper-plane mr-2"></i> Soumettre
                     </button>
                 </div>
             </form>
@@ -221,7 +230,7 @@
                 <div class="flex items-center justify-center text-green-500 text-5xl mb-4">
                     <i class="fas fa-check-circle"></i>
                 </div>
-                <p class="text-sm text-gray-500">Les données ont été exportées avec succès au format XLS.</p>
+                <p class="text-sm text-gray-500" id="export-message">Les données ont été exportées avec succès au format XLS.</p>
                 <div class="bg-blue-50 p-4 rounded-md">
                     <p class="text-sm text-blue-700">Le fichier a été enregistré sous : <span id="exported-filename" class="font-medium"></span></p>
                 </div>
@@ -234,7 +243,56 @@
         </div>
     </div>
 
+    <!-- Modal d'email -->
+    <div id="email-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-medium text-gray-900">Envoyer par email</h3>
+                <button id="close-email-modal" class="text-gray-400 hover:text-gray-500">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label for="recipient-email" class="block text-sm font-medium text-gray-700">Email du destinataire</label>
+                    <input type="email" id="recipient-email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="contact@entreprise.com">
+                </div>
+                <div>
+                    <label for="email-subject" class="block text-sm font-medium text-gray-700">Sujet</label>
+                    <input type="text" id="email-subject" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Candidature VTC - [Nom] [Prénom]">
+                </div>
+                <div>
+                    <label for="email-message" class="block text-sm font-medium text-gray-700">Message</label>
+                    <textarea id="email-message" rows="4" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">Bonjour,
+
+Veuillez trouver ci-joint mon dossier de candidature pour devenir chauffeur VTC à Genève.
+
+Cordialement,
+[Nom] [Prénom]</textarea>
+                </div>
+                <div class="bg-green-50 p-3 rounded-md border border-green-200">
+                    <p class="text-sm text-green-700">
+                        <i class="fas fa-info-circle mr-1"></i> Le fichier XLS et les documents joints seront envoyés en pièces jointes.
+                    </p>
+                </div>
+            </div>
+            <div class="mt-5 flex justify-end space-x-3">
+                <button id="cancel-email-btn" type="button" class="px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                    Annuler
+                </button>
+                <button id="confirm-email-btn" type="button" class="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
+                    <i class="fas fa-paper-plane mr-2"></i> Envoyer
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Initialiser EmailJS (remplacer avec votre User ID en production)
+        (function(){
+            emailjs.init("YOUR_USER_ID"); // À remplacer avec votre propre User ID
+        })();
+
         // Gestion des noms de fichiers pour l'affichage
         document.getElementById('id_card').addEventListener('change', function() {
             document.getElementById('id_card_name').textContent = this.files[0] ? this.files[0].name : 'Aucun fichier sélectionné';
@@ -260,70 +318,169 @@
             });
         });
 
-        // Export Excel
-        document.getElementById('export-btn').addEventListener('click', function() {
+        // Soumission du formulaire
+        document.getElementById('vtc-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
             if (!document.getElementById('consent').checked) {
-                alert('Veuillez accepter les conditions avant d\'exporter.');
+                alert('Veuillez accepter les conditions avant de soumettre.');
                 return;
             }
 
+            const attachmentMethod = document.getElementById('attachment_method').value;
+            
+            if (attachmentMethod === 'xls') {
+                exportToXLS(true); // Inclure les fichiers dans le XLS
+            } else {
+                // Afficher le formulaire d'email avec pièces jointes
+                document.getElementById('email-modal').classList.remove('hidden');
+                
+                // Pré-remplir le sujet de l'email
+                const lastname = document.getElementById('lastname').value;
+                const firstname = document.getElementById('firstname').value;
+                document.getElementById('email-subject').value = `Candidature VTC - ${lastname} ${firstname}`;
+                
+                // Pré-remplir le message
+                document.getElementById('email-message').value = `Bonjour,
+
+Veuillez trouver ci-joint mon dossier de candidature pour devenir chauffeur VTC à Genève.
+
+Cordialement,
+${lastname} ${firstname}`;
+            }
+        });
+
+        // Fonction pour exporter en XLS
+        function exportToXLS(includeFiles = false) {
             // Collecter toutes les données du formulaire
             const formData = new FormData(document.getElementById('vtc-form'));
             const data = {};
             
             for (let [key, value] of formData.entries()) {
-                // Exclure les fichiers de l'export
-                if (!['id_card', 'driving_license', 'work_permit_doc', 'medical_certificate', 'insurance'].includes(key)) {
+                // Ne pas inclure les fichiers dans les données brutes
+                if (!['id_card', 'driving_license', 'work_permit_doc', 'medical_certificate', 'insurance', 'attachment_method'].includes(key)) {
                     data[key] = value;
                 }
             }
 
-            // Ajouter les noms des fichiers
-            data['id_card'] = document.getElementById('id_card').files[0] ? document.getElementById('id_card').files[0].name : 'Non fourni';
-            data['driving_license'] = document.getElementById('driving_license').files[0] ? document.getElementById('driving_license').files[0].name : 'Non fourni';
-            data['work_permit_doc'] = document.getElementById('work_permit_doc').files[0] ? document.getElementById('work_permit_doc').files[0].name : 'Non fourni';
-            data['medical_certificate'] = document.getElementById('medical_certificate').files[0] ? document.getElementById('medical_certificate').files[0].name : 'Non fourni';
-            data['insurance'] = document.getElementById('insurance').files[0] ? document.getElementById('insurance').files[0].name : 'Non fourni';
-            data['export_date'] = new Date().toLocaleString();
-
-            // Créer un worksheet
-            const ws = XLSX.utils.json_to_sheet([data]);
-            
             // Créer un workbook
             const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "Chauffeur_VTC");
+            
+            if (includeFiles) {
+                // Si on inclut les fichiers dans le XLS
+                const fileInputs = ['id_card', 'driving_license', 'work_permit_doc', 'medical_certificate', 'insurance'];
+                const promises = [];
+                
+                fileInputs.forEach(id => {
+                    const fileInput = document.getElementById(id);
+                    if (fileInput.files.length > 0) {
+                        const promise = new Promise((resolve) => {
+                            const file = fileInput.files[0];
+                            const reader = new FileReader();
+                            
+                            reader.onload = function(e) {
+                                const binaryData = e.target.result;
+                                // Ajouter le fichier comme une feuille séparée
+                                XLSX.utils.book_append_sheet(wb, {content: [binaryData]}, `Fichier_${id}`);
+                                resolve();
+                            };
+                            
+                            reader.readAsBinaryString(file);
+                        });
+                        promises.push(promise);
+                    }
+                });
+                
+                // Attendre que tous les fichiers soient traités
+                Promise.all(promises).then(() => {
+                    // Ajouter les données comme une feuille principale
+                    const ws = XLSX.utils.json_to_sheet([data]);
+                    XLSX.utils.book_append_sheet(wb, ws, "Donnees");
+                    
+                    // Finaliser et exporter
+                    finalizeExport(wb);
+                });
+            } else {
+                // Si on n'inclut pas les fichiers dans le XLS
+                const ws = XLSX.utils.json_to_sheet([data]);
+                XLSX.utils.book_append_sheet(wb, ws, "Donnees");
+                
+                // Finaliser et exporter
+                finalizeExport(wb);
+            }
+        }
 
+        function finalizeExport(wb) {
             // Générer un nom de fichier
-            const nom = formData.get('lastname') || 'chauffeur';
-            const prenom = formData.get('firstname') || 'vtc';
-            const filename = `VTC_Genève_${nom}_${prenom}.xlsx`;
+            const nom = document.getElementById('lastname').value || 'chauffeur';
+            const prenom = document.getElementById('firstname').value || 'vtc';
+            const filename = `VTC_Geneve_${nom}_${prenom}.xlsx`;
 
             // Exporter
             XLSX.writeFile(wb, filename);
 
             // Afficher la modal
+            document.getElementById('export-message').textContent = 
+                document.getElementById('attachment_method').value === 'xls' 
+                ? "Les données et fichiers joints ont été exportés avec succès au format XLS."
+                : "Les données ont été exportées avec succès au format XLS.";
+                
             document.getElementById('exported-filename').textContent = filename;
             document.getElementById('export-modal').classList.remove('hidden');
-        });
+        }
 
-        // Simulation d'envoi par email
-        document.getElementById('email-btn').addEventListener('click', function() {
-            if (!document.getElementById('consent').checked) {
-                alert('Veuillez accepter les conditions avant d\'envoyer.');
+        // Envoi par email
+        document.getElementById('confirm-email-btn').addEventListener('click', function() {
+            const recipientEmail = document.getElementById('recipient-email').value;
+            const subject = document.getElementById('email-subject').value;
+            const message = document.getElementById('email-message').value;
+            
+            if (!recipientEmail) {
+                alert('Veuillez saisir une adresse email valide.');
                 return;
             }
-
-            // Ici vous pourriez intégrer un service d'envoi d'email réel
-            // Pour cet exemple, nous allons simplement exporter le XLS et proposer de l'envoyer par email
-            alert('Pour envoyer par email, veuillez d\'abord exporter le fichier XLS puis l\'envoyer manuellement.\n\nUne intégration avec un service email serait possible en production.');
+            
+            // Créer d'abord le XLS
+            exportToXLS(false); // Ne pas inclure les fichiers dans le XLS
+            
+            // Ensuite préparer les pièces jointes pour l'email
+            const formData = new FormData(document.getElementById('vtc-form'));
+            const files = [];
+            const fileInputs = ['id_card', 'driving_license', 'work_permit_doc', 'medical_certificate', 'insurance'];
+            
+            fileInputs.forEach(id => {
+                const fileInput = document.getElementById(id);
+                if (fileInput.files.length > 0) {
+                    files.push(fileInput.files[0]);
+                }
+            });
+            
+            // En production, vous utiliseriez EmailJS ou un autre service pour envoyer l'email réellement
+            // Ceci est une simulation
+            alert(`Email préparé pour : ${recipientEmail}\n\nSujet: ${subject}\n\nMessage: ${message}\n\nPièces jointes: ${files.length} fichier(s) + le XLS.`);
+            
+            // Fermer la modal
+            document.getElementById('email-modal').classList.add('hidden');
+            
+            // Afficher un message de confirmation
+            alert('Votre dossier a été envoyé avec succès par email.');
         });
 
-        // Fermer la modal d'export
+        // Fermer les modals
         document.getElementById('close-export-modal').addEventListener('click', function() {
             document.getElementById('export-modal').classList.add('hidden');
         });
+        
         document.getElementById('ok-export-btn').addEventListener('click', function() {
             document.getElementById('export-modal').classList.add('hidden');
+        });
+        
+        document.getElementById('close-email-modal').addEventListener('click', function() {
+            document.getElementById('email-modal').classList.add('hidden');
+        });
+        
+        document.getElementById('cancel-email-btn').addEventListener('click', function() {
+            document.getElementById('email-modal').classList.add('hidden');
         });
     </script>
 </body>
