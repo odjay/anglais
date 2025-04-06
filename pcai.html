@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amélioration des Prestations Complémentaires AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hero-gradient {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .section-divider {
+            position: relative;
+            height: 80px;
+            overflow: hidden;
+        }
+        .section-divider::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 100%;
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 0 100%);
+        }
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -38px;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #2563eb;
+            border: 4px solid #bfdbfe;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-hand-holding-heart text-blue-600 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-blue-600">PC AI Genève</span>
+                    </div>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+                    <a href="#introduction" class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">Introduction</a>
+                    <a href="#problematiques" class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">Problématiques</a>
+                    <a href="#solutions" class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">Solutions</a>
+                    <a href="#financement" class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">Financement</a>
+                    <a href="#contact" class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Contact</a>
+                </div>
+                <div class="-mr-2 flex items-center md:hidden">
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div class="hidden md:hidden" id="mobile-menu">
+            <div class="pt-2 pb-3 space-y-1">
+                <a href="#introduction" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-blue-600">Introduction</a>
+                <a href="#problematiques" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-blue-600">Problématiques</a>
+                <a href="#solutions" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-blue-600">Solutions</a>
+                <a href="#financement" class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-blue-600">Financement</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-blue-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-gradient text-white">
+        <div class="max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                    Amélioration des Prestations Complémentaires AI
+                </h1>
+                <p class="mt-6 max-w-2xl mx-auto text-xl">
+                    Un système plus inclusif et adapté aux réalités économiques et sociales du canton de Genève
+                </p>
+                <div class="mt-10 flex justify-center space-x-4">
+                    <a href="#solutions" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-blue-700 bg-white hover:bg-blue-50">
+                        Voir les solutions
+                    </a>
+                    <a href="#problematiques" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-800 bg-opacity-60 hover:bg-opacity-70">
+                        Comprendre les enjeux
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Introduction Section -->
+    <div id="introduction" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-base text-blue-600 font-semibold tracking-wide uppercase">Introduction</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Garantir un revenu décent pour tous
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    Les prestations complémentaires (PC) visent à combler l'écart entre les rentes AVS/AI et les besoins vitaux, mais des lacunes persistent.
+                </p>
+            </div>
+
+            <div class="mt-20">
+                <div class="grid grid-cols-1 gap-12 md:grid-cols-3">
+                    <div class="pt-6">
+                        <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8 h-full">
+                            <div class="-mt-6">
+                                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Objectif principal</h3>
+                                <p class="mt-5 text-base text-gray-500">
+                                    Garantir un revenu décent aux personnes dont les rentes AVS/AI ou autres revenus ne suffisent pas à couvrir leurs besoins vitaux.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6">
+                        <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8 h-full">
+                            <div class="-mt-6">
+                                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Problématiques</h3>
+                                <p class="mt-5 text-base text-gray-500">
+                                    Délais prolongés, complexité administrative, charges non couvertes, inscription non automatique, et barèmes obsolètes.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6">
+                        <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8 h-full">
+                            <div class="-mt-6">
+                                <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Solutions proposées</h3>
+                                <p class="mt-5 text-base text-gray-500">
+                                    Inscription automatique, prise en compte des charges réelles, soutien financier temporaire, et révision des barèmes.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem Section -->
+    <div id="problematiques" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-base text-blue-600 font-semibold tracking-wide uppercase">Problématiques</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Les lacunes du système actuel
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    Plusieurs obstacles empêchent les prestations complémentaires de remplir pleinement leur rôle.
+                </p>
+            </div>
+
+            <div class="mt-12">
+                <div class="space-y-12">
+                    <!-- Timeline -->
+                    <div class="relative">
+                        <div class="absolute left-8 top-0 h-full w-0.5 bg-gray-200"></div>
+                        
+                        <!-- Item 1 -->
+                        <div class="relative pl-16 pb-12 timeline-item">
+                            <div class="bg-white p-6 rounded-lg shadow-sm card-hover transition-all duration-300">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <span class="flex items-center justify-center h-10 w-10 rounded-md bg-blue-100 text-blue-600">
+                                            <i class="fas fa-clock"></i>
+                                        </span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-lg font-medium text-gray-900">Délais prolongés et complexité administrative</h3>
+                                        <div class="mt-2 text-gray-600">
+                                            <p>Les délais moyens entre le dépôt d'une demande AI et la décision finale varient entre 12 et 24 mois. Les démarches nécessitent de nombreux justificatifs, mobilisant d'importantes ressources des services sociaux.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Item 2 -->
+                        <div class="relative pl-16 pb-12 timeline-item">
+                            <div class="bg-white p-6 rounded-lg shadow-sm card-hover transition-all duration-300">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <span class="flex items-center justify-center h-10 w-10 rounded-md bg-blue-100 text-blue-600">
+                                            <i class="fas fa-home"></i>
+                                        </span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-lg font-medium text-gray-900">Charges non couvertes</h3>
+                                        <div class="mt-2 text-gray-600">
+                                            <p>Certains frais (loyer élevé, primes d'assurance-maladie, frais médicaux non remboursés) restent non couverts. Les demandeurs doivent parfois attendre plusieurs mois avant de recevoir une aide complémentaire.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Item 3 -->
+                        <div class="relative pl-16 pb-12 timeline-item">
+                            <div class="bg-white p-6 rounded-lg shadow-sm card-hover transition-all duration-300">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <span class="flex items-center justify-center h-10 w-10 rounded-md bg-blue-100 text-blue-600">
+                                            <i class="fas fa-file-signature"></i>
+                                        </span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-lg font-medium text-gray-900">Inscription non automatique</h3>
+                                        <div class="mt-2 text-gray-600">
+                                            <p>L'accès aux PC nécessite une demande formelle complexe pour les personnes malades ou en difficulté administrative. Les bénéficiaires potentiels ne sont pas automatiquement inscrits même en situation critique.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Item 4 -->
+                        <div class="relative pl-16 pb-12 timeline-item">
+                            <div class="bg-white p-6 rounded-lg shadow-sm card-hover transition-all duration-300">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <span class="flex items-center justify-center h-10 w-10 rounded-md bg-blue-100 text-blue-600">
+                                            <i class="fas fa-calculator"></i>
+                                        </span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-lg font-medium text-gray-900">Prise en compte incomplète des charges</h3>
+                                        <div class="mt-2 text-gray-600">
+                                            <p>Les PC utilisent des barèmes standardisés sans toujours prendre en compte les charges réelles, excluant certaines dépenses spécifiques ou imprévues comme les frais médicaux non remboursés.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Item 5 -->
+                        <div class="relative pl-16 pb-12 timeline-item">
+                            <div class="bg-white p-6 rounded-lg shadow-sm card-hover transition-all duration-300">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <span class="flex items-center justify-center h-10 w-10 rounded-md bg-blue-100 text-blue-600">
+                                            <i class="fas fa-money-bill-wave"></i>
+                                        </span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-lg font-medium text-gray-900">Accès limité aux financements partiels</h3>
+                                        <div class="mt-2 text-gray-600">
+                                            <p>Les seuils rigides (fortune, revenus déterminants) empêchent l'accès à un soutien financier partiel ou temporaire, risquant d'endetter les personnes confrontées à une baisse rapide de revenus.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Item 6 -->
+                        <div class="relative pl-16 timeline-item">
+                            <div class="bg-white p-6 rounded-lg shadow-sm card-hover transition-all duration-300">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <span class="flex items-center justify-center h-10 w-10 rounded-md bg-blue-100 text-blue-600">
+                                            <i class="fas fa-building"></i>
+                                        </span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-lg font-medium text-gray-900">Crise du logement et barèmes obsolètes</h3>
+                                        <div class="mt-2 text-gray-600">
+                                            <p>Les montants maximaux reconnus pour les loyers sont souvent inférieurs aux prix réels du marché, compliquant l'accès à un logement abordable et aggravant la précarité.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Solutions Section -->
+    <div id="solutions" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-base text-blue-600 font-semibold tracking-wide uppercase">Solutions</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Nos propositions d'amélioration
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    Des mesures concrètes pour un système plus efficace et humain
+                </p>
+            </div>
+
+            <div class="mt-12">
+                <div class="space-y-8">
+                    <!-- Accordion Item 1 -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 flex justify-between items-center" onclick="toggleAccordion('accordion1')">
+                            <span class="text-lg font-medium text-gray-900">Inscription automatique et simplifiée en cas de demande AI</span>
+                            <i class="fas fa-chevron-down transform transition-transform duration-300" id="accordion1-icon"></i>
+                        </button>
+                        <div class="accordion-content" id="accordion1-content">
+                            <div class="px-6 py-4 bg-white">
+                                <p class="text-gray-600">
+                                    Mettre en place une inscription automatique aux PC dès qu'une demande AI est déposée, avec un accès immédiat basé sur la baisse de revenus constatée. Utiliser les données fiscales et sociales existantes pour identifier automatiquement les bénéficiaires potentiels sans nécessiter une demande formelle.
+                                </p>
+                                <div class="mt-4">
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                        <i class="fas fa-check-circle mr-2"></i> Avantage : Réduction immédiate de la précarité
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Accordion Item 2 -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 flex justify-between items-center" onclick="toggleAccordion('accordion2')">
+                            <span class="text-lg font-medium text-gray-900">Prise en compte des charges réelles et flexibilité accrue</span>
+                            <i class="fas fa-chevron-down transform transition-transform duration-300" id="accordion2-icon"></i>
+                        </button>
+                        <div class="accordion-content" id="accordion2-content">
+                            <div class="px-6 py-4 bg-white">
+                                <p class="text-gray-600">
+                                    Adapter les barèmes pour inclure les charges effectives mensuelles sur présentation de justificatifs (loyer réel, frais médicaux non remboursés, etc.). Introduire une procédure accélérée pour reconnaître ces dépenses spécifiques dans le calcul des PC.
+                                </p>
+                                <div class="mt-4">
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                        <i class="fas fa-check-circle mr-2"></i> Avantage : Meilleure adéquation aux besoins réels
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Accordion Item 3 -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 flex justify-between items-center" onclick="toggleAccordion('accordion3')">
+                            <span class="text-lg font-medium text-gray-900">Soutien financier temporaire et rétroactif</span>
+                            <i class="fas fa-chevron-down transform transition-transform duration-300" id="accordion3-icon"></i>
+                        </button>
+                        <div class="accordion-content" id="accordion3-content">
+                            <div class="px-6 py-4 bg-white">
+                                <p class="text-gray-600">
+                                    Créer une aide transitoire spécifique (24 à 36 mois) permettant un soutien partiel ou total pendant la période d'attente d'une décision AI. Permettre une rétroactivité accrue des prestations dès le début de la baisse de revenus ou de l'arrêt maladie prolongé.
+                                </p>
+                                <div class="mt-4">
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                        <i class="fas fa-check-circle mr-2"></i> Avantage : Prévention du surendettement
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Accordion Item 4 -->
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 flex justify-between items-center" onclick="toggleAccordion('accordion4')">
+                            <span class="text-lg font-medium text-gray-900">Révision des barèmes et soutien au logement abordable</span>
+                            <i class="fas fa-chevron-down transform transition-transform duration-300" id="accordion4-icon"></i>
+                        </button>
+                        <div class="accordion-content" id="accordion4-content">
+                            <div class="px-6 py-4 bg-white">
+                                <p class="text-gray-600">
+                                    Augmenter les plafonds reconnus pour les loyers afin de refléter la réalité du marché immobilier actuel dans chaque canton. Collaborer avec les cantons pour développer des programmes spécifiques d'aide au logement abordable destinés aux bénéficiaires de PC.
+                                </p>
+                                <div class="mt-4">
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                        <i class="fas fa-check-circle mr-2"></i> Avantage : Amélioration des conditions de vie
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefits Section -->
+            <div class="mt-16">
+                <h3 class="text-2xl font-bold text-gray-900 text-center">Impacts positifs des solutions proposées</h3>
+                
+                <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2">
+                    <!-- For Beneficiaries -->
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-blue-100 rounded-md p-3">
+                                <i class="fas fa-user-friends text-blue-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium text-gray-900">Pour les bénéficiaires</h4>
+                            </div>
+                        </div>
+                        <ul class="mt-4 space-y-3">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <i class="fas fa-check-circle text-blue-500"></i>
+                                </div>
+                                <p class="ml-3 text-gray-600">Réduction immédiate de la précarité financière grâce à un accès rapide aux prestations</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <i class="fas fa-check-circle text-blue-500"></i>
+                                </div>
+                                <p class="ml-3 text-gray-600">Simplification administrative grâce à l'automatisation basée sur des données existantes</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <i class="fas fa-check-circle text-blue-500"></i>
+                                </div>
+                                <p class="ml-3 text-gray-600">Complémentarité avec l'APGM pour offrir une couverture continue sans surindemnisation</p>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- For Social Services -->
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-blue-100 rounded-md p-3">
+                                <i class="fas fa-hands-helping text-blue-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium text-gray-900">Pour les services sociaux</h4>
+                            </div>
+                        </div>
+                        <ul class="mt-4 space-y-3">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <i class="fas fa-check-circle text-blue-500"></i>
+                                </div>
+                                <p class="ml-3 text-gray-600">Réduction de la charge administrative liée au traitement manuel des demandes simples</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <i class="fas fa-check-circle text-blue-500"></i>
+                                </div>
+                                <p class="ml-3 text-gray-600">Concentration des ressources sur les cas complexes nécessitant une intervention humaine</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <i class="fas fa-check-circle text-blue-500"></i>
+                                </div>
+                                <p class="ml-3 text-gray-600">Amélioration de l'efficacité globale grâce à un ciblage précis basé sur des critères objectifs</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Financement Section -->
+    <div id="financement" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-base text-blue-600 font-semibold tracking-wide uppercase">Financement</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Coût estimé et sources potentielles
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    Une estimation réaliste pour le canton de Genève
+                </p>
+            </div>
+
+            <div class="mt-12">
+                <div class="bg-white shadow overflow-hidden rounded-lg">
+                    <div class="px-4 py-5 sm:px-6 border-b border-gray-200">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">
+                            Coût estimé pour le canton de Genève
+                        </h3>
+                    </div>
+                    <div class="bg-white px-4 py-5 sm:p-6">
+                        <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+                            <div>
+                                <h4 class="text-md font-medium text-gray-900 mb-4">Nombre de bénéficiaires potentiels</h4>
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <p class="text-3xl font-bold text-blue-600">775</p>
+                                    <p class="text-gray-600 mt-1">personnes/an (estimation basée sur 6,2 % de la population suisse)</p>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-md font-medium text-gray-900 mb-4">Montant moyen par bénéficiaire</h4>
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <p class="text-3xl font-bold text-blue-600">CHF 10'000 à 30'000</p>
+                                    <p class="text-gray-600 mt-1">par an, selon la durée (12 ou 24 mois) et le besoin réel après déduction des APGM</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8">
+                            <h4 class="text-md font-medium text-gray-900 mb-4">Coût total annuel estimé</h4>
+                            <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <p class="text-xl font-bold text-blue-600">Pour une durée moyenne de 12 mois</p>
+                                    <p class="text-2xl font-bold mt-2">Entre 7,75 millions CHF et 23,25 millions CHF</p>
+                                </div>
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <p class="text-xl font-bold text-blue-600">Pour une durée moyenne de 24 mois</p>
+                                    <p class="text-2xl font-bold mt-2">Entre 15,5 millions CHF et 46,5 millions CHF</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12">
+                    <h3 class="text-2xl font-bold text-gray-900">Sources potentielles de financement</h3>
+                    
+                    <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                        <!-- Source 1 -->
+                        <div class="bg-white p-6 rounded-lg shadow-sm card-hover transition-all duration-300">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                                <i class="fas fa-percentage"></i>
+                            </div>
+                            <h4 class="mt-5 text-lg font-medium text-gray-900">Cotisations sociales</h4>
+                            <p class="mt-2 text-gray-600">
+                                Augmentation ciblée des cotisations sociales (0,05 % sur les cotisations AVS/AI)
+                            </p>
+                        </div>
+                        
+                        <!-- Source 2 -->
+                        <div class="bg-white p-6 rounded-lg shadow-sm card-hover transition-all duration-300">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                                <i class="fas fa-landmark"></i>
+                            </div>
+                            <h4 class="mt-5 text-lg font-medium text-gray-900">Contribution fédérale</h4>
+                            <p class="mt-2 text-gray-600">
+                                Contribution fédérale accrue via réaffectation budgétaire ou excédents budgétaires
+                            </p>
+                        </div>
+                        
+                        <!-- Source 3 -->
+                        <div class="bg-white p-6 rounded-lg shadow-sm card-hover transition-all duration-300">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <h4 class="mt-5 text-lg font-medium text-gray-900">Collaboration cantonale</h4>
+                            <p class="mt-2 text-gray-600">
+                                Partage du coût avec les cantons (par exemple, prise en charge de 30 % via leurs caisses cantonales)
+                            </p>
+                        </div>
+                        
+                        <!-- Source 4 -->
+                        <div class="bg-white p-6 rounded-lg shadow-sm card-hover transition-all duration-300">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                                <i class="fas fa-file-invoice-dollar"></i>
+                            </div>
+                            <h4 class="mt-5 text-lg font-medium text-gray-900">Taxe sociale</h4>
+                            <p class="mt-2 text-gray-600">
+                                Introduction d'une taxe sociale dédiée sur certains produits ou transactions financières
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conclusion Section -->
+    <div class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-blue-700 rounded-lg shadow-xl overflow-hidden">
+                <div class="px-6 py-12 sm:p-12">
+                    <div class="text-center">
+                        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                            Conclusion et appel à l'action
+                        </h2>
+                        <p class="mt-6 max-w-2xl mx-auto text-xl text-blue-100">
+                            Les prestations complémentaires doivent évoluer pour mieux répondre aux besoins des personnes confrontées à une baisse rapide de revenus ou à une situation critique.
+                        </p>
+                        <div class="mt-10 flex justify-center space-x-4">
+                            <a href="#contact" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-blue-700 bg-white hover:bg-blue-50">
+                                Nous contacter
+                            </a>
+                            <a href="#introduction" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-800 bg-opacity-60 hover:bg-opacity-70">
+                                En savoir plus
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div id="contact" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-base text-blue-600 font-semibold tracking-wide uppercase">Contact</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Sensibiliser les décideurs politiques
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    Ce document peut servir de base pour lancer une initiative visant à améliorer le cadre légal et administratif des prestations complémentaires.
+                </p>
+            </div>
+
+            <div class="mt-12">
+                <div class="bg-white shadow overflow-hidden rounded-lg">
+                    <div class="px-4 py-5 sm:p-6">
+                        <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+                            <div>
+                                <h3 class="text-lg font-medium text-gray-900">Envoyez-nous un message</h3>
+                                <form class="mt-6 space-y-6">
+                                    <div>
+                                        <label for="name" class="block text-sm font-medium text-gray-700">Nom</label>
+                                        <input type="text" id="name" name="name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                    </div>
+                                    <div>
+                                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                                        <input type="email" id="email" name="email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                    </div>
+                                    <div>
+                                        <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                                        <textarea id="message" name="message" rows="4" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
+                                    </div>
+                                    <div>
+                                        <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                            Envoyer
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-medium text-gray-900">Coordonnées</h3>
+                                <div class="mt-6 space-y-4">
+                                    <div class="flex">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-map-marker-alt text-gray-400"></i>
+                                        </div>
+                                        <div class="ml-3 text-base text-gray-500">
+                                            <p>Rue du Stand 60</p>
+                                            <p>1204 Genève</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-phone-alt text-gray-400"></i>
+                                        </div>
+                                        <div class="ml-3 text-base text-gray-500">
+                                            <p>+41 22 123 45 67</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-envelope text-gray-400"></i>
+                                        </div>
+                                        <div class="ml-3 text-base text-gray-500">
+                                            <p>contact@pc-geneve.ch</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-8">
+                                    <h4 class="text-sm font-medium text-gray-900">Suivez-nous</h4>
+                                    <div class="mt-3 flex space-x-4">
+                                        <a href="#" class="text-gray-400 hover:text-gray-500">
+                                            <i class="fab fa-facebook-f text-xl"></i>
+                                        </a>
+                                        <a href="#" class="text-gray-400 hover:text-gray-500">
+                                            <i class="fab fa-twitter text-xl"></i>
+                                        </a>
+                                        <a href="#" class="text-gray-400 hover:text-gray-500">
+                                            <i class="fab fa-linkedin-in text-xl"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">À propos</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Notre mission</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Équipe</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Partenaires</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Ressources</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Documentation</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">FAQ</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Médias</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Légal</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Confidentialité</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Conditions</a></li>
+                        <li><a href="#" class="text-base text-gray-400 hover:text-white">Accessibilité</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Newsletter</h3>
+                    <p class="mt-4 text-base text-gray-400">Abonnez-vous à nos actualités</p>
+                    <form class="mt-4 sm:flex">
+                        <input type="email" placeholder="Votre email" class="w-full px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <button type="submit" class="mt-3 sm:mt-0 sm:ml-3 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            OK
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-gray-700 pt-8 md:flex md:items-center md:justify-between">
+                <div class="flex space-x-6 md:order-2">
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+                <p class="mt-8 text-base text-gray-400 md:mt-0 md:order-1">
+                    &copy; 2023 Amélioration des Prestations Complémentaires AI. Tous droits réservés.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // Accordion functionality
+        function toggleAccordion(id) {
+            const content = document.getElementById(`${id}-content`);
+            const icon = document.getElementById(`${id}-icon`);
+            
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                icon.classList.remove('rotate-180');
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+                icon.classList.add('rotate-180');
+            }
+        }
+
+        // Initialize accordions to be closed
+        document.addEventListener('DOMContentLoaded', function() {
+            const accordions = ['accordion1', 'accordion2', 'accordion3', 'accordion4'];
+            accordions.forEach(id => {
+                const content = document.getElementById(`${id}-content`);
+                content.style.maxHeight = null;
+            });
+        });
+    </script>
+</body>
+</html>
