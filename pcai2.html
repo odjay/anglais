@@ -4,287 +4,609 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amélioration des Prestations Complémentaires AI</title>
+    <title>Automatisation des Prestations Transitoires et PC AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Basic Styling - Consider a separate CSS file for a more complete design */
-        body {
-            font-family: sans-serif;
-            margin: 0;
-            padding: 0;
+        .hero-gradient {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
         }
 
-        .container {
-            width: 80%;
-            margin: auto;
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
-        .accordion {
-            background-color: #eee;
-            color: #444;
-            cursor: pointer;
-            padding: 18px;
-            width: 100%;
-            border: none;
-            text-align: left;
-            outline: none;
-            transition: 0.4s;
+        .section-divider {
+            position: relative;
+            height: 80px;
+            overflow: hidden;
         }
 
-        .active,
-        .accordion:hover {
-            background-color: #ddd;
+        .section-divider::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 100%;
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 0 100%);
         }
 
-        .panel {
-            padding: 0 18px;
-            background-color: white;
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -38px;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #2563eb;
+            border: 4px solid #bfdbfe;
+        }
+
+        .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.2s ease-out;
+            transition: max-height 0.3s ease-out;
         }
 
-        h1 {
-            font-size: 2em;
-            margin-top: 1em;
-        }
-
-        h2 {
-            font-size: 1.5em;
-            margin-top: 1em;
+        /* Style pour le footer */
+        .footer-gradient {
+            background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+            color: white;
         }
     </style>
 </head>
 
-<body>
-    <div class="container">
-        <h1>Amélioration des Prestations Complémentaires AI</h1>
+<body class="font-sans antialiased text-gray-800">
 
-        <section id="introduction">
-            <h2>Introduction</h2>
-            <p>
-                Le système suisse de prestations complémentaires (PC) vise à garantir un niveau
-                de vie décent aux bénéficiaires de rentes AVS/AI dont les revenus sont insuffisants.
-                Cependant, des lacunes importantes existent, particulièrement pour les personnes en
-                attente d'une décision de l'Assurance Invalidité (AI). La période d'attente, souvent
-                longue, combinée à des procédures administratives complexes, engendre précarité,
-                risque de surendettement et non-recours aux droits.
-                Cette proposition vise à moderniser le système par
-                l'automatisation et la simplification, afin d'offrir un soutien plus rapide, ciblé
-                et efficace.
-            </p>
-        </section>
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="/" class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-robot text-blue-600 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-blue-600">PC AI Automatisé</span>
+                    </a>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+                    <a href="#introduction"
+                        class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">Introduction</a>
+                    <a href="#problematiques"
+                        class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">Problématiques</a>
+                    <a href="#solutions"
+                        class="text-gray-900 hover:text-blue-600 px-3 py-2 text-sm font-medium">Solutions</a>
+                    <a href="#contact"
+                        class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Contact</a>
+                </div>
+                <div class="-mr-2 flex items-center md:hidden">
+                    <button type="button" id="mobile-menu-button"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="hidden md:hidden" id="mobile-menu">
+            <div class="pt-2 pb-3 space-y-1">
+                <a href="#introduction"
+                    class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-blue-600">Introduction</a>
+                <a href="#problematiques"
+                    class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-blue-600">Problématiques</a>
+                <a href="#solutions"
+                    class="block px-3 py-2 text-base font-medium text-gray-900 hover:text-blue-600">Solutions</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-blue-600">Contact</a>
+            </div>
+        </div>
+    </nav>
 
-        <section id="problematiques">
-            <h2>Problématiques Actuelles</h2>
-            <button class="accordion">Délais Prolongés et Complexité Administrative</button>
-            <div class="panel">
-                <p>
-                    Les décisions AI prennent en moyenne 12 à 24 mois. Durant cette période, les
-                    demandeurs subissent une baisse de revenus significative. L'accès aux PC
-                    nécessite une demande séparée, avec de nombreux justificatifs, ce qui est une
-                    charge lourde pour les personnes malades et les services sociaux.
+    <div class="hero-gradient text-white">
+        <div class="max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                    Automatisation des Prestations Transitoires et PC AI
+                </h1>
+                <p class="mt-6 max-w-2xl mx-auto text-xl">
+                    Un système simplifié et rapide pour garantir la couverture des besoins vitaux
                 </p>
+                <div class="mt-10 flex justify-center space-x-4">
+                    <a href="#solutions"
+                        class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-blue-700 bg-white hover:bg-blue-50">
+                        Voir les solutions
+                    </a>
+                    <a href="#problematiques"
+                        class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-800 bg-opacity-60 hover:bg-opacity-70">
+                        Comprendre les enjeux
+                    </a>
+                </div>
             </div>
-
-            <button class="accordion">Charges Non Couvertes</button>
-            <div class="panel">
-                <p>
-                    Les indemnités existantes (p. ex. Assurance Perte de Gain Maladie - APGM)
-                    couvrent souvent une partie seulement du revenu antérieur (70-80%), laissant
-                    un vide financier important face aux charges réelles (loyer, primes maladie,
-                    frais médicaux). Certains frais (loyer élevé, primes d'assurance-maladie, frais
-                    médicaux non remboursés) restent non couverts par l'APGM ou d'autres
-                    dispositifs. Les demandeurs doivent parfois attendre plusieurs mois avant de
-                    recevoir une aide complémentaire.
-                </p>
-            </div>
-
-            <button class="accordion">Accès Non Automatique aux PC</button>
-            <div class="panel">
-                <p>
-                    L'inscription aux PC n'est pas automatique lors du dépôt d'une demande AI,
-                    même si la situation financière l'exige, ce qui mène à un non-recours aux droits.
-                    Actuellement, l'accès aux PC nécessite une demande formelle auprès de l'agence
-                    AVS communale, ce qui peut être complexe pour les personnes malades ou en
-                    difficulté administrative. Les bénéficiaires potentiels ne sont pas
-                    automatiquement inscrits, même si leur situation financière est critique ou si
-                    une demande AI est en cours.
-                </p>
-            </div>
-
-            <button class="accordion">Prise en Compte Incomplète des Charges Effectives</button>
-            <div class="panel">
-                <p>
-                    Les PC utilisent des barèmes standardisés pour calculer les dépenses reconnues
-                    (loyer, prime d'assurance-maladie, etc.), sans toujours prendre en compte
-                    les charges réelles des bénéficiaires. Cela exclut certaines dépenses
-                    spécifiques ou imprévues, comme les frais médicaux non remboursés ou les
-                    dettes accumulées pendant une période de transition.
-                </p>
-            </div>
-
-            <button class="accordion">Accès Limité aux Financements Partiels</button>
-            <div class="panel">
-                <p>
-                    Le système actuel impose souvent des seuils rigides (fortune, revenus
-                    déterminants), ce qui empêche l'accès à un soutien financier partiel ou
-                    temporaire pour couvrir les besoins urgents. Les personnes confrontées à
-                    une baisse rapide de revenus risquent de s'endetter avant de pouvoir stabiliser
-                    leur situation financière.
-                </p>
-            </div>
-
-            <button class="accordion">Difficultés Liées au Logement</button>
-            <div class="panel">
-                <p>
-                    Les montants maximaux reconnus pour les loyers dans le cadre des PC sont
-                    souvent inférieurs aux prix réels du marché, particulièrement dans les
-                    régions où la crise du logement est aiguë. Cela complique l'accès à un
-                    logement abordable pour les bénéficiaires et aggrave leur précarité.
-                </p>
-            </div>
-        </section>
-
-        <section id="solutions">
-            <h2>Solutions Proposées</h2>
-
-            <button class="accordion">Automatisation Déclenchée par la Demande AI</button>
-            <div class="panel">
-                <p>
-                    Le dépôt d'une demande AI initierait automatiquement une évaluation pour
-                    des "Prestations Transitoires" (PT) ou un accès simplifié aux PC.
-                    L'éligibilité et le calcul des prestations seraient basés sur les données déjà
-                    disponibles auprès des administrations (AVS, fisc, APGM, assureurs), réduisant
-                    drastiquement les démarches pour les demandeurs.
-                    Les justificatifs ne seraient demandés qu'en cas d'absolue nécessité (données
-                    manquantes ou anomalies).
-                </p>
-            </div>
-
-            <button class="accordion">Mise en Place de Prestations Transitoires (PT)</button>
-            <div class="panel">
-                <p>
-                    Création d'une aide financière temporaire (ex: 12 à 36 mois) pour couvrir
-                    spécifiquement la période d'attente de la décision AI. Le montant
-                    serait calculé sur la base de la perte réelle de revenu (après APGM) et des
-                    charges fixes vérifiées, assurant une couverture adéquate sans risque de
-                    surindemnisation. Une certaine rétroactivité serait appliquée
-                    pour couvrir les besoins dès le début de la perte de revenu.
-                </p>
-            </div>
-
-            <button class="accordion">Prise en Compte des Charges Effectives</button>
-            <div class="panel">
-                <p>
-                    Intégration des charges mensuelles réelles (loyer, primes maladie, frais
-                    médicaux non remboursés) dans le calcul, via une procédure accélérée si
-                    nécessaire. Révision des plafonds reconnus (notamment les
-                    loyers) pour refléter les réalités du marché local.
-                </p>
-            </div>
-
-            <button class="accordion">Suivi et Optimisation</button>
-            <div class="panel">
-                <p>
-                    Un suivi automatisé permettrait d'ajuster les prestations en cas de
-                    changement de situation. L'automatisation libérerait les services sociaux
-                    pour se concentrer sur l'accompagnement des cas complexes.
-                </p>
-            </div>
-        </section>
-
-        <section id="impacts">
-            <h2>Impacts Positifs Attendus</h2>
-
-            <button class="accordion">Pour les Citoyens</button>
-            <div class="panel">
-                <ul>
-                    <li>Sécurité financière accrue durant une période difficile.</li>
-                    <li>Simplification administrative majeure.</li>
-                    <li>Prévention efficace du surendettement et garantie d'accès aux droits.</li>
-                    <li>Complémentarité avec l'APGM pour offrir une couverture continue sans surindemnisation.</li>
-                </ul>
-            </div>
-
-            <button class="accordion">Pour les Services Publics</button>
-            <div class="panel">
-                <ul>
-                    <li>Réduction significative de la charge administrative.</li>
-                    <li>Meilleure allocation des ressources humaines.</li>
-                    <li>Augmentation de l'efficacité globale.</li>
-                </ul>
-            </div>
-
-            <button class="accordion">Pour le Système Social Suisse</button>
-            <div class="panel">
-                <ul>
-                    <li>Modernisation indispensable.</li>
-                    <li>Renforcement de la cohésion sociale.</li>
-                    <li>Optimisation de l'utilisation des fonds publics.</li>
-                    <li>Meilleure réponse aux besoins actuels.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="conclusion">
-            <h2>Conclusion et Appel à l'Action</h2>
-            <p>
-                La mise en œuvre de ces propositions permettrait de combler une lacune
-                critique de notre système de protection sociale. En automatisant et
-                simplifiant l'accès à un soutien financier transitoire pour les demandeurs AI,
-                nous pouvons prévenir des situations de détresse financière, soulager les
-                services sociaux et moderniser notre approche de la solidarité.
-            </p>
-
-            <p>
-                Nous appelons les décideurs politiques et les acteurs de la cohésion sociale à
-                examiner et soutenir cette réforme essentielle pour garantir une protection
-                sociale plus juste, réactive et efficace pour toutes et tous.
-                Ce document
-                offre une base solide pour l'élaboration d'un projet législatif concret.
-            </p>
-        </section>
-
-    <section id="references">
-        <h2>Références</h2>
-        <p>Ce document est basé sur l'analyse et les propositions contenues dans les documents suivants :</p>
-        <ul>
-            <li>Prestations-transitoires-AI.pdf</li>
-            <li>Document de Présentation _ Amélioration des Prestations transitoires AI.pdf</li>
-            <li>Coût estimé des Prestations Transitoires AI pour GE.pdf</li>
-            <li>Proposition _ Automatisation Maximale des Presta.pdf</li>
-            <li>Amélioration des Prestations Complémentaires AI.pdf</li>
-        </ul>
-        <p>
-            Les informations sur le cadre légal actuel des prestations complémentaires ont été obtenues à partir des sources suivantes :
-        </p>
-        <ul>
-            <li><a href="https://www.guidesocial.ch/recherche/fiche/generatepdfAll/117">guidesocial.ch</a></li>
-            <li><a href="https://www.akbern.ch/fr/Assurances/PC/Prestations-complementaires/Prestations-complementaires.html">akbern.ch</a></li>
-            <li><a href="https://www.caisseavsne.ch/fr/Assurances/PC/Prestations-complementaires/Prestations-complementaires.html">caisseavsne.ch</a></li>
-            <li><a href="https://www.ahv-iv.ch/fr/assurances-sociales/prestations-complémentaires-pc/prestations-complémentaires-annuelles">ahv-iv.ch</a></li>
-            <li><a href="https://www.bsv.admin.ch/bsv/fr/home/assurances-sociales/ergaenzungsleistungen/grundlagen-und-gesetze/grundlagen/mietkosten-ergaenzungsleistungen.html">bsv.admin.ch</a></li>
-        </ul>
-    </section>
-
+        </div>
     </div>
 
+    <div id="introduction" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-base text-blue-600 font-semibold tracking-wide uppercase">Introduction</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Garantir un soutien rapide et efficace
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    Les prestations transitoires (PT) et les prestations complémentaires AI (PC AI) sont
+                    essentielles pour les personnes en situation de précarité financière.
+                </p>
+            </div>
+
+            <div class="mt-20">
+                <div class="grid grid-cols-1 gap-12 md:grid-cols-3">
+                    <div class="pt-6">
+                        <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8 h-full">
+                            <div class="-mt-6">
+                                <div
+                                    class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Délais actuels</h3>
+                                <p class="mt-5 text-base text-gray-500">
+                                    Actuellement, les délais entre le dépôt d'une demande AI et la décision finale
+                                    varient entre 12 et 24 mois.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6">
+                        <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8 h-full">
+                            <div class="-mt-6">
+                                <div
+                                    class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Complexité administrative
+                                </h3>
+                                <p class="mt-5 text-base text-gray-500">
+                                    Les démarches nécessitent de nombreux justificatifs, ce qui mobilise d'importantes
+                                    ressources des services sociaux.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6">
+                        <div class="flow-root bg-gray-50 rounded-lg px-6 pb-8 h-full">
+                            <div class="-mt-6">
+                                <div
+                                    class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-500 text-white">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                                <h3 class="mt-8 text-lg font-medium text-gray-900 tracking-tight">Charges non couvertes</h3>
+                                <p class="mt-5 text-base text-gray-500">
+                                    Certains frais (loyer élevé, primes d'assurance-maladie, frais médicaux) restent
+                                    non couverts pendant les délais d'attente.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="problematiques" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-base text-blue-600 font-semibold tracking-wide uppercase">Problématiques</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Les défis du système actuel
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    Plusieurs obstacles empêchent les prestations de remplir pleinement leur rôle.
+                </p>
+            </div>
+
+            <div class="mt-12">
+                <div class="space-y-12">
+                    <div class="relative">
+                        <div class="absolute left-8 top-0 h-full w-0.5 bg-gray-200"></div>
+
+                        <div class="relative pl-16 pb-12 timeline-item">
+                            <div class="bg-white p-6 rounded-lg shadow-sm card-hover transition-all duration-300">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <span
+                                            class="flex items-center justify-center h-10 w-10 rounded-md bg-blue-100 text-blue-600">
+                                            <i class="fas fa-clock"></i>
+                                        </span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-lg font-medium text-gray-900">Délais prolongés et complexité
+                                            administrative</h3>
+                                        <div class="mt-2 text-gray-600">
+                                            <p>Les délais moyens entre le dépôt d'une demande AI et la décision finale varient
+                                                entre 12 et 24 mois. Les démarches nécessitent de nombreux justificatifs,
+                                                mobilisant d'importantes ressources des services sociaux.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative pl-16 pb-12 timeline-item">
+                            <div class="bg-white p-6 rounded-lg shadow-sm card-hover transition-all duration-300">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <span
+                                            class="flex items-center justify-center h-10 w-10 rounded-md bg-blue-100 text-blue-600">
+                                            <i class="fas fa-home"></i>
+                                        </span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-lg font-medium text-gray-900">Charges non couvertes</h3>
+                                        <div class="mt-2 text-gray-600">
+                                            <p>Certains frais (loyer élevé, primes d'assurance-maladie, frais médicaux non
+                                                remboursés) restent non couverts. Les demandeurs doivent parfois attendre
+                                                plusieurs mois avant de recevoir une aide complémentaire.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative pl-16 pb-12 timeline-item">
+                            <div class="bg-white p-6 rounded-lg shadow-sm card-hover transition-all duration-300">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <span
+                                            class="flex items-center justify-center h-10 w-10 rounded-md bg-blue-100 text-blue-600">
+                                            <i class="fas fa-file-signature"></i>
+                                        </span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-lg font-medium text-gray-900">Inscription non automatique</h3>
+                                        <div class="mt-2 text-gray-600">
+                                            <p>L'accès aux PC nécessite une demande formelle complexe pour les personnes
+                                                malades ou en difficulté administrative. Les bénéficiaires potentiels ne sont pas
+                                                automatiquement inscrits.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative pl-16 pb-12 timeline-item">
+                            <div class="bg-white p-6 rounded-lg shadow-sm card-hover transition-all duration-300">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <span
+                                            class="flex items-center justify-center h-10 w-10 rounded-md bg-blue-100 text-blue-600">
+                                            <i class="fas fa-calculator"></i>
+                                        </span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-lg font-medium text-gray-900">Prise en compte incomplète des
+                                            charges</h3>
+                                        <div class="mt-2 text-gray-600">
+                                            <p>Les PC utilisent des barèmes standardisés sans toujours prendre en compte les
+                                                charges réelles, excluant certaines dépenses spécifiques ou imprévues.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative pl-16 pb-12 timeline-item">
+                            <div class="bg-white p-6 rounded-lg shadow-sm card-hover transition-all duration-300">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <span
+                                            class="flex items-center justify-center h-10 w-10 rounded-md bg-blue-100 text-blue-600">
+                                            <i class="fas fa-money-bill-wave"></i>
+                                        </span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-lg font-medium text-gray-900">Accès limité aux financements
+                                            partiels</h3>
+                                        <div class="mt-2 text-gray-600">
+                                            <p>Les seuils rigides (fortune, revenus déterminants) empêchent l'accès à un soutien
+                                                financier partiel ou temporaire, risquant d'endetter les personnes confrontées
+                                                à une baisse rapide de revenus.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative pl-16 timeline-item">
+                            <div class="bg-white p-6 rounded-lg shadow-sm card-hover transition-all duration-300">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0">
+                                        <span
+                                            class="flex items-center justify-center h-10 w-10 rounded-md bg-blue-100 text-blue-600">
+                                            <i class="fas fa-building"></i>
+                                        </span>
+                                    </div>
+                                    <div class="ml-4">
+                                        <h3 class="text-lg font-medium text-gray-900">Crise du logement et barèmes
+                                            obsolètes</h3>
+                                        <div class="mt-2 text-gray-600">
+                                            <p>Les montants maximaux reconnus pour les loyers sont souvent inférieurs aux
+                                                prix réels du marché, compliquant l'accès à un logement abordable et
+                                                aggravant la précarité.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="solutions" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-base text-blue-600 font-semibold tracking-wide uppercase">Solutions</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Notre proposition d'automatisation
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    Un système simplifié et efficace pour un soutien rapide
+                </p>
+            </div>
+
+            <div class="mt-12">
+                <div class="space-y-8">
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button
+                            class="w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 flex justify-between items-center"
+                            onclick="toggleAccordion('accordion1')">
+                            <span class="text-lg font-medium text-gray-900">Exploitation des données existantes</span>
+                            <i class="fas fa-chevron-down transform transition-transform duration-300"
+                                id="accordion1-icon"></i>
+                        </button>
+                        <div class="accordion-content" id="accordion1-content">
+                            <div class="px-6 py-4 bg-white">
+                                <p class="text-gray-600">
+                                    Utiliser les données fiscales, sociales et médicales déjà disponibles auprès des
+                                    administrations publiques (AVS, APGM, impôts). Intégrer ces données dans un
+                                    système centralisé pour évaluer automatiquement l'éligibilité du demandeur.
+                                </p>
+                                <div class="mt-4">
+                                    <span
+                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                        <i class="fas fa-check-circle mr-2"></i> Avantage : Réduction de la charge
+                                        administrative
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button
+                            class="w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 flex justify-between items-center"
+                            onclick="toggleAccordion('accordion2')">
+                            <span class="text-lg font-medium text-gray-900">Attribution automatique</span>
+                            <i class="fas fa-chevron-down transform transition-transform duration-300"
+                                id="accordion2-icon"></i>
+                        </button>
+                        <div class="accordion-content" id="accordion2-content">
+                            <div class="px-6 py-4 bg-white">
+                                <p class="text-gray-600">
+                                    Dès le dépôt d'une demande AI ou PT : Vérification automatique des revenus actuels
+                                    (via fiches de salaire ou attestations APGM). Prise en compte des charges fixes
+                                    déclarées dans la déclaration fiscale (loyer, primes d'assurance-maladie).
+                                    Identification automatique des frais médicaux non remboursés via les assureurs.
+                                </p>
+                                <div class="mt-4">
+                                    <span
+                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                        <i class="fas fa-check-circle mr-2"></i> Avantage : Décision rapide
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button
+                            class="w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 flex justify-between items-center"
+                            onclick="toggleAccordion('accordion3')">
+                            <span class="text-lg font-medium text-gray-900">Montant ajusté selon les besoins</span>
+                            <i class="fas fa-chevron-down transform transition-transform duration-300"
+                                id="accordion3-icon"></i>
+                        </button>
+                        <div class="accordion-content" id="accordion3-content">
+                            <div class="px-6 py-4 bg-white">
+                                <p class="text-gray-600">
+                                    Le montant serait calculé automatiquement en fonction de la perte réelle de revenus
+                                    non couverte par l'APGM ou d'autres dispositifs et des charges fixes vérifiées.
+                                    Exemple : Si l'APGM couvre 80% du salaire brut, une prestation transitoire pourrait
+                                    compenser jusqu'à 20% supplémentaires pour atteindre le revenu initial.
+                                </p>
+                                <div class="mt-4">
+                                    <span
+                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                        <i class="fas fa-check-circle mr-2"></i> Avantage : Adéquation aux besoins
+                                        réels
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button
+                            class="w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 flex justify-between items-center"
+                            onclick="toggleAccordion('accordion4')">
+                            <span class="text-lg font-medium text-gray-900">Suivi continu</span>
+                            <i class="fas fa-chevron-down transform transition-transform duration-300"
+                                id="accordion4-icon"></i>
+                        </button>
+                        <div class="accordion-content" id="accordion4-content">
+                            <div class="px-6 py-4 bg-white">
+                                <p class="text-gray-600">
+                                    Un suivi automatisé permettrait de vérifier régulièrement si la situation financière
+                                    ou familiale du bénéficiaire a changé (par exemple, reprise d'une activité partielle
+                                    ou augmentation des charges).
+                                </p>
+                                <div class="mt-4">
+                                    <span
+                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                        <i class="fas fa-check-circle mr-2"></i> Avantage : Adaptation continue
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button
+                            class="w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 flex justify-between items-center"
+                            onclick="toggleAccordion('accordion5')">
+                            <span class="text-lg font-medium text-gray-900">Barèmes adaptés aux réalités
+                                actuelles</span>
+                            <i class="fas fa-chevron-down transform transition-transform duration-300"
+                                id="accordion5-icon"></i>
+                        </button>
+                        <div class="accordion-content" id="accordion5-content">
+                            <div class="px-6 py-4 bg-white">
+                                <p class="text-gray-600">
+                                    Les barèmes utilisés pour calculer les prestations complémentaires seraient mis à
+                                    jour régulièrement pour refléter les réalités économiques actuelles. Cela inclut
+                                    une meilleure prise en compte des coûts du logement, des primes
+                                    d'assurance-maladie et des frais médicaux spécifiques.
+                                </p>
+                                <div class="mt-4">
+                                    <span
+                                        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                        <i class="fas fa-check-circle mr-2"></i> Avantage : Équité et actualisation
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mt-16">
+                    <h3 class="text-2xl font-bold text-gray-900 text-center">Impacts positifs des solutions proposées</h3>
+
+                    <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2">
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 bg-blue-100 rounded-md p-3">
+                                    <i class="fas fa-user-friends text-blue-600 text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium text-gray-900">Pour les bénéficiaires</h4>
+                                </div>
+                            </div>
+                            <ul class="mt-4 space-y-3">
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-check-circle text-blue-500"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-600">Réduction immédiate de la précarité financière grâce
+                                        à un accès rapide aux prestations</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-check-circle text-blue-500"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-600">Simplification administrative grâce à
+                                        l'automatisation basée sur des données existantes</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-check-circle text-blue-500"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-600">Complémentarité avec l'APGM pour offrir une
+                                        couverture continue sans surindemnisation</p>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 bg-blue-100 rounded-md p-3">
+                                    <i class="fas fa-hands-helping text-blue-600 text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-medium text-gray-900">Pour les services sociaux</h4>
+                                </div>
+                            </div>
+                            <ul class="mt-4 space-y-3">
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-check-circle text-blue-500"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-600">Réduction de la charge administrative liée au
+                                        traitement manuel des demandes simples</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-check-circle text-blue-500"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-600">Concentration des ressources sur les cas complexes
+                                        nécessitant une intervention humaine</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 mt-1">
+                                        <i class="fas fa-check-circle text-blue-500"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-600">Amélioration de l'efficacité globale grâce à un ciblage
+                                        précis basé sur des critères objectifs</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-blue-700 rounded-lg shadow-xl overflow-hidden">
+                <div class="px-6 py-12 sm:p-12">
+                    <div class="text-center">
+                        <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+                            Prêt à moderniser le système social ?
+                        </h2>
+                        <p class="mt-3 max-w-xl mx-auto text-base text-blue-100 sm:mt-5">
+                            Contactez-nous pour discuter de la mise en œuvre de ces solutions et améliorer
+                            l'efficacité de votre système de prestations.
+                        </p>
+                        <div class="mt-8 sm:flex sm:justify-center lg:justify-center">
+                            <div class="rounded-md shadow">
+                                <a href="#contact"
+                                    class="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50">
+                                    Nous contacter
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-gradient py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-base text-blue-100">
+                © 2024 PC AI Automatisé. Tous droits réservés.
+            </p>
+        </div>
+    </footer>
+
     <script>
-        var acc = document.getElementsByClassName("accordion");
-        var i;
-
-        for (i = 0; i < acc.length; i++) {
-            acc[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var panel = this.nextElementSibling;
-                if (panel.style.maxHeight) {
-                    panel.style.maxHeight = null;
-                } else {
-                    panel.style.maxHeight = panel.scrollHeight + "px";
-                }
-            });
-        }
-    </script>
-</body>
-
-</html>
+        // Fonction pour toggle l'affichage d'un élément accordéon
+        function toggleAccordion(id) {
+            const content = document.getElementById(id + '-content');
+            const icon = document.getElementById(id + '-icon');
+            if
