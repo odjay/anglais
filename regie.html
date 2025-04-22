@@ -3,168 +3,332 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Répertoire du logement à Genève – Liens & descriptions</title>
+  <title>Logement Genève – Répertoire & Conseils 2025</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    body {font-family: 'Segoe UI', Arial, sans-serif; background: #f8f9fa; margin: 0; color: #222;}
-    .container {max-width: 900px; margin: 0 auto; padding: 1.5rem;}
-    h1, h2 {color: #2c3e50;}
-    h1 {text-align: center; margin-bottom: 1.2rem;}
-    .section {margin-bottom: 2.2rem;}
-    .link-card {
-      background: #fff;
-      border-radius: 9px;
-      box-shadow: 0 1px 5px rgba(44,62,80,0.07);
-      margin-bottom: 1.2rem;
-      padding: 1.1rem 1rem;
-      border-left: 5px solid #3498db;
-      transition: box-shadow 0.2s;
+    :root {
+      --primary: #2c3e50;
+      --secondary: #3498db;
+      --bg: #f8f9fa;
+      --card: #fff;
+      --accent: #eaf6fb;
+      --radius: 14px;
+      --shadow: 0 2px 10px rgba(44,62,80,0.08);
     }
-    .link-card:hover {box-shadow: 0 4px 14px rgba(44,62,80,0.13);}
-    .link-title {font-size: 1.13rem; font-weight: bold; color: #3498db;}
-    .link-url {font-size: 0.98rem; color: #2980b9; word-break: break-all;}
-    .link-desc {margin: 0.4rem 0 0.2rem 0;}
-    @media (max-width: 600px) {.container {padding: 0.5rem;}}
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background: var(--bg);
+      margin: 0;
+      color: var(--primary);
+      font-size: 17px;
+    }
+    .container {
+      max-width: 950px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+    h1, h2 {
+      color: var(--primary);
+      text-align: center;
+      font-weight: 700;
+    }
+    h1 {
+      font-size: 2.1rem;
+      margin-bottom: 1.5rem;
+    }
+    h2 {
+      font-size: 1.35rem;
+      margin: 2.5rem 0 1rem 0;
+      border-left: 6px solid var(--secondary);
+      padding-left: 0.6rem;
+      text-align: left;
+    }
+    .section {
+      margin-bottom: 2.2rem;
+    }
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 1.2rem;
+    }
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.3rem 1.1rem 1.1rem 1.1rem;
+      position: relative;
+      transition: box-shadow 0.2s, transform 0.2s;
+      border-left: 5px solid var(--secondary);
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    .card:hover {
+      box-shadow: 0 8px 28px rgba(44,62,80,0.15);
+      transform: translateY(-2px) scale(1.01);
+    }
+    .icon {
+      font-size: 1.7em;
+      color: var(--secondary);
+      margin-bottom: 0.3em;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .card-title {
+      font-size: 1.14em;
+      font-weight: bold;
+      color: var(--secondary);
+      margin-bottom: 0.18em;
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+    }
+    .card-desc {
+      font-size: 1em;
+      margin-bottom: 0.4em;
+      color: #333;
+    }
+    .card-link a {
+      color: var(--primary);
+      font-size: 0.97em;
+      text-decoration: underline;
+      word-break: break-all;
+    }
+    .tips, .market {
+      background: var(--accent);
+      border-radius: var(--radius);
+      padding: 1.2em;
+      margin: 1.5em 0;
+      border-left: 6px solid var(--secondary);
+      font-size: 1em;
+    }
+    .market {
+      background: #e8f6e8;
+      border-color: #27ae60;
+    }
+    .pdf-notice {
+      background: #e2e3e5;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+      color: #555;
+      font-size: 1em;
+      text-align: center;
+    }
+    @media (max-width: 600px) {
+      .container {padding: 0.5rem;}
+      h1 {font-size: 1.3rem;}
+      h2 {font-size: 1.05rem;}
+      .card {padding: 1rem 0.7rem;}
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Répertoire du logement à Genève</h1>
+    <h1><i class="fa-solid fa-building"></i> Guide Logement Genève 2025</h1>
+    <div class="pdf-notice">
+      <strong>Note :</strong> Ce guide combine toutes les références officielles du logement à Genève, issues des ressources publiques, du PDF officiel et des tendances du marché locatif 2025.
+    </div>
 
-    <!-- CO-LOCATION ET AUTRES -->
-    <div class="section">
-      <h2>Colocation, solutions alternatives & logements meublés</h2>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://ensembleavectoit.com" target="_blank">ensembleavectoit.com</a></div>
-        <div class="link-desc">Colocation solidaire : hébergement chez un particulier à loyer modéré ou gratuit contre services (courses, présence, aide). Idéal pour étudiants, jeunes actifs ou seniors souhaitant partager un logement.</div>
+    <div class="tips">
+      <b>Conseils pratiques pour réussir votre recherche à Genève :</b>
+      <ul>
+        <li>Préparez un dossier complet : pièce d'identité, 3 fiches de salaire, attestation de non-poursuite, références.</li>
+        <li>Anticipez : le taux de vacance est très bas (<b>0,46%</b> en 2024[8]), les biens partent vite.</li>
+        <li>Multipliez les candidatures, activez votre réseau et surveillez les annonces chaque jour.</li>
+        <li>Pour le social/cooperatif : privilégiez les fondations, coopératives et régies publiques.</li>
+        <li>Pour le temporaire/meublé : plateformes spécialisées, colocation, et agences dédiées.</li>
+      </ul>
+    </div>
+
+    <!-- Colocation et Autres -->
+    <h2><i class="fa-solid fa-people-roof icon"></i> Colocation & Logements Alternatifs</h2>
+    <div class="grid-cards">
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-handshake-angle"></i> Ensemble avec Toit</div>
+        <div class="card-desc">Colocation solidaire : hébergement chez un particulier à loyer modéré ou gratuit contre services (présence, courses, aide). Idéal pour étudiants, jeunes actifs ou seniors.</div>
+        <div class="card-link"><a href="https://ensembleavectoit.com" target="_blank">ensembleavectoit.com</a></div>
       </div>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://www.homegate.ch/louer/logement-meuble/region-nyon/liste-annonces" target="_blank">homegate.ch (logement meublé)</a></div>
-        <div class="link-desc">Portail suisse majeur pour la location de logements meublés de courte ou moyenne durée, idéal pour missions temporaires ou arrivées récentes. Nombreuses annonces sur Genève et Nyon.</div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-bed"></i> Homegate (meublé)</div>
+        <div class="card-desc">Portail suisse majeur pour locations meublées de courte ou moyenne durée. Résidence des Alpes (Regimo) propose des chambres à louer en colocation.</div>
+        <div class="card-link"><a href="https://www.homegate.ch/louer/logement-meuble/region-nyon/liste-annonces" target="_blank">homegate.ch (meublé)</a></div>
       </div>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://vernetsdarve.ch/" target="_blank">vernetsdarve.ch</a></div>
-        <div class="link-desc">Association offrant des appartements à loyers modérés pour femmes seules ou avec enfants à Genève. Priorité aux situations précaires. Dossier à constituer.</div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-person-dress"></i> Vernets d'Arve</div>
+        <div class="card-desc">Appartements à loyers modérés pour femmes seules ou avec enfants. Priorité aux situations précaires. Dossier à constituer.</div>
+        <div class="card-link"><a href="https://vernetsdarve.ch/" target="_blank">vernetsdarve.ch</a></div>
       </div>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://gerpar.ch/" target="_blank">gerpar.ch</a></div>
-        <div class="link-desc">Régie proposant des studios et appartements meublés dans plusieurs résidences à Genève, pour étudiants, jeunes actifs ou séjours temporaires.</div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-house-user"></i> Gerpar</div>
+        <div class="card-desc">Studios et appartements meublés dans 4 résidences à Genève, pour étudiants, jeunes actifs ou séjours temporaires.</div>
+        <div class="card-link"><a href="https://gerpar.ch/" target="_blank">gerpar.ch</a></div>
       </div>
     </div>
 
-    <!-- COOPERATIVES -->
-    <div class="section">
-      <h2>Coopératives d’habitation</h2>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://www.cogerim.ch/fr/HomePage" target="_blank">cogerim.ch</a></div>
-        <div class="link-desc">Société Coopérative de Gérance Immobilière : gestion, conseil et réalisation de projets coopératifs et logements durables à Genève.</div>
+    <!-- Coopératives -->
+    <h2><i class="fa-solid fa-people-group icon"></i> Coopératives d’habitation</h2>
+    <div class="grid-cards">
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-house-chimney"></i> Cogerim</div>
+        <div class="card-desc">Société Coopérative de Gérance Immobilière : gestion, conseil et projets coopératifs à Genève.</div>
+        <div class="card-link"><a href="https://www.cogerim.ch/fr/HomePage" target="_blank">cogerim.ch</a></div>
       </div>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://codha.ch/fr/pra-sentation" target="_blank">codha.ch</a></div>
-        <div class="link-desc">Coopérative de l’Habitat Associatif : logements participatifs, autogérés, à loyers abordables, avec implication des habitants dans la gestion et la conception.</div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-leaf"></i> Codha</div>
+        <div class="card-desc">Coopérative de l’Habitat Associatif : logements participatifs, autogérés, à loyers abordables, implication des habitants.</div>
+        <div class="card-link"><a href="https://codha.ch/fr/pra-sentation" target="_blank">codha.ch</a></div>
       </div>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="http://www.schg.ch" target="_blank">schg.ch</a></div>
-        <div class="link-desc">Société Coopérative d’Habitation Genève : acteur historique du logement social à Genève, logements à loyers modérés, esprit communautaire.</div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-building"></i> SCHG</div>
+        <div class="card-desc">Société Coopérative d’Habitation Genève : acteur historique du logement social à Genève, esprit communautaire.</div>
+        <div class="card-link"><a href="http://www.schg.ch" target="_blank">schg.ch</a></div>
       </div>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://fplc.ch" target="_blank">fplc.ch</a></div>
-        <div class="link-desc">Fondation pour la promotion du logement bon marché et de l’habitat coopératif : soutien et développement de projets coopératifs, liste des coopératives partenaires.</div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-hand-holding-heart"></i> FPLC</div>
+        <div class="card-desc">Fondation pour la promotion du logement bon marché et de l’habitat coopératif : soutien et développement de projets coopératifs.</div>
+        <div class="card-link"><a href="https://fplc.ch" target="_blank">fplc.ch</a></div>
       </div>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://gchg.ch/membres" target="_blank">gchg.ch/membres</a></div>
-        <div class="link-desc">Groupement des Coopératives d’Habitation Genevoises : fédération regroupant 80 coopératives, liste et contacts pour candidatures.</div>
-      </div>
-    </div>
-
-    <!-- REGIES PUBLIQUES, FONDATIONS, CAISSES DE PREVOYANCE -->
-    <div class="section">
-      <h2>Régies publiques, fondations & caisses de prévoyance</h2>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://fidp.ch/" target="_blank">fidp.ch</a></div>
-        <div class="link-desc">Fondations immobilières de droit public : gestion de logements subventionnés dans plusieurs communes genevoises. Dossiers à déposer auprès de la fondation concernée.</div>
-      </div>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://www.geneve.ch/fr/demarches/faire-demande-logement-social" target="_blank">geneve.ch (GIM)</a></div>
-        <div class="link-desc">Gérance Immobilière Municipale (GIM) : plateforme officielle pour la demande de logement social à Genève, critères d’éligibilité et suivi des dossiers.</div>
-      </div>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://fvgls.ch/" target="_blank">fvgls.ch</a></div>
-        <div class="link-desc">Fondation de la Ville de Genève pour le Logement Social : logements subventionnés pour familles et personnes à faibles revenus, candidatures en ligne.</div>
-      </div>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://www.cpeg.ch/parc-immobilier/locations" target="_blank">cpeg.ch</a></div>
-        <div class="link-desc">Caisse de prévoyance de l’État de Genève : parc immobilier important, logements pour actifs et retraités du secteur public, annonces en ligne.</div>
-      </div>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://cap-prevoyance.ch/formulaire-demande-location-logement/" target="_blank">cap-prevoyance.ch</a></div>
-        <div class="link-desc">Caisse de prévoyance de la Ville de Genève et des communes : logements pour affiliés, formulaire de demande en ligne.</div>
-      </div>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://www.parloca-geneve.ch/regies/" target="_blank">parloca-geneve.ch</a></div>
-        <div class="link-desc">Fondation immobilière Parloca : liste des immeubles et régies partenaires dans tout le canton, logements à loyers modérés.</div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-list"></i> GCHG</div>
+        <div class="card-desc">Groupement des Coopératives d’Habitation Genevoises : fédération regroupant 80 coopératives, liste et contacts pour candidatures.</div>
+        <div class="card-link"><a href="https://gchg.ch/membres" target="_blank">gchg.ch/membres</a></div>
       </div>
     </div>
 
-    <!-- PETITES ANNONCES IMMOBILIERES -->
-    <div class="section">
-      <h2>Petites annonces immobilières</h2>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://pa.ghi.ch" target="_blank">pa.ghi.ch</a></div>
-        <div class="link-desc">Petites annonces immobilières de l’hebdomadaire GHI, gratuit, paraît tous les mercredis. Large choix d’offres à Genève et environs.</div>
+    <!-- Régies publiques, fondations, caisses de prévoyance -->
+    <h2><i class="fa-solid fa-landmark icon"></i> Régies publiques, Fondations & Caisses de prévoyance</h2>
+    <div class="grid-cards">
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-shield-halved"></i> FIDP</div>
+        <div class="card-desc">Fondations immobilières de droit public : gestion de logements subventionnés dans plusieurs communes genevoises.</div>
+        <div class="card-link"><a href="https://fidp.ch/" target="_blank">fidp.ch</a></div>
       </div>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://anibis.ch" target="_blank">anibis.ch</a></div>
-        <div class="link-desc">Portail suisse de petites annonces gratuites, rubrique « immobilier » très active pour Genève, offres de particuliers et d’agences.</div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-city"></i> GIM (Ville de Genève)</div>
+        <div class="card-desc">Gérance Immobilière Municipale : demande officielle de logement social à Genève, critères d’éligibilité et suivi en ligne.</div>
+        <div class="card-link"><a href="https://www.geneve.ch/fr/demarches/faire-demande-logement-social" target="_blank">geneve.ch (GIM)</a></div>
       </div>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://petitesannonces.ch" target="_blank">petitesannonces.ch</a></div>
-        <div class="link-desc">Plateforme généraliste de petites annonces, section immobilier pour locations et ventes à Genève et en Suisse romande.</div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-hand-holding-dollar"></i> FVGLS</div>
+        <div class="card-desc">Fondation de la Ville de Genève pour le Logement Social : logements subventionnés pour familles et personnes à faibles revenus.</div>
+        <div class="card-link"><a href="https://fvgls.ch/" target="_blank">fvgls.ch</a></div>
       </div>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://joomil.ch" target="_blank">joomil.ch</a></div>
-        <div class="link-desc">Site suisse de petites annonces gratuites, rubrique immobilier, offres variées sur Genève et alentours.</div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-piggy-bank"></i> CPEG</div>
+        <div class="card-desc">Caisse de prévoyance de l’État de Genève : parc immobilier important, logements pour actifs et retraités du secteur public.</div>
+        <div class="card-link"><a href="https://www.cpeg.ch/parc-immobilier/locations" target="_blank">cpeg.ch</a></div>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-vault"></i> CAP-Prévoyance</div>
+        <div class="card-desc">Caisse de prévoyance de la Ville de Genève et des communes : logements pour affiliés, formulaire de demande en ligne.</div>
+        <div class="card-link"><a href="https://cap-prevoyance.ch/formulaire-demande-location-logement/" target="_blank">cap-prevoyance.ch</a></div>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-list-check"></i> Parloca Genève</div>
+        <div class="card-desc">Fondation immobilière Parloca : liste des immeubles et régies partenaires dans tout le canton, logements à loyers modérés.</div>
+        <div class="card-link"><a href="https://www.parloca-geneve.ch/regies/" target="_blank">parloca-geneve.ch</a></div>
       </div>
     </div>
 
-    <!-- MOTEURS DE RECHERCHE IMMOBILIERS -->
-    <div class="section">
-      <h2>Moteurs de recherche immobiliers</h2>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://npph.net/immo.html" target="_blank">npph.net/immo.html</a></div>
-        <div class="link-desc">Liste alphabétique des régies proposant des appartements à Genève, avec liens directs vers leur site ou leurs annonces.</div>
+    <!-- Petites annonces immobilières -->
+    <h2><i class="fa-solid fa-newspaper icon"></i> Petites annonces immobilières</h2>
+    <div class="grid-cards">
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-bullhorn"></i> GHI Petites annonces</div>
+        <div class="card-desc">Annonces immobilières de l’hebdomadaire GHI, gratuit, paraît tous les mercredis. Large choix d’offres à Genève et environs.</div>
+        <div class="card-link"><a href="https://pa.ghi.ch" target="_blank">pa.ghi.ch</a></div>
       </div>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://immobilier.ch" target="_blank">immobilier.ch</a></div>
-        <div class="link-desc">Portail de référence pour la location et la vente en Suisse romande, annonces de nombreuses régies genevoises.</div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-bullhorn"></i> Anibis</div>
+        <div class="card-desc">Portail suisse de petites annonces gratuites, rubrique « immobilier » très active pour Genève, offres de particuliers et d’agences.</div>
+        <div class="card-link"><a href="https://anibis.ch" target="_blank">anibis.ch</a></div>
       </div>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://immostreet.ch/fr" target="_blank">immostreet.ch/fr</a></div>
-        <div class="link-desc">Moteur de recherche immobilier suisse, annonces de particuliers et d’agences à Genève et en Suisse.</div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-bullhorn"></i> Petitesannonces.ch</div>
+        <div class="card-desc">Plateforme généraliste de petites annonces, section immobilier pour locations et ventes à Genève et en Suisse romande.</div>
+        <div class="card-link"><a href="https://petitesannonces.ch" target="_blank">petitesannonces.ch</a></div>
       </div>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://immoscout24.ch" target="_blank">immoscout24.ch</a></div>
-        <div class="link-desc">Leader suisse des portails immobiliers, moteur de recherche puissant, alertes personnalisées.</div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-bullhorn"></i> Joomil</div>
+        <div class="card-desc">Site suisse de petites annonces gratuites, rubrique immobilier, offres variées sur Genève et alentours.</div>
+        <div class="card-link"><a href="https://joomil.ch" target="_blank">joomil.ch</a></div>
       </div>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://homegate.ch" target="_blank">homegate.ch</a></div>
-        <div class="link-desc">Portail suisse majeur, partenaire de nombreuses agences, annonces actualisées quotidiennement.</div>
+    </div>
+
+    <!-- Moteurs de recherche immobiliers -->
+    <h2><i class="fa-solid fa-magnifying-glass-location icon"></i> Moteurs de recherche immobiliers</h2>
+    <div class="grid-cards">
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-list"></i> Liste des régies (NPPH)</div>
+        <div class="card-desc">Liste alphabétique des régies proposant des appartements à Genève, avec liens directs vers leur site ou leurs annonces.</div>
+        <div class="card-link"><a href="https://npph.net/immo.html" target="_blank">npph.net/immo.html</a></div>
       </div>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://home.ch" target="_blank">home.ch</a></div>
-        <div class="link-desc">Moteur de recherche immobilier suisse, interface simple, annonces de location et de vente.</div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-magnifying-glass"></i> Immobilier.ch</div>
+        <div class="card-desc">Portail de référence pour la location et la vente en Suisse romande, annonces de nombreuses régies genevoises.</div>
+        <div class="card-link"><a href="https://immobilier.ch" target="_blank">immobilier.ch</a></div>
       </div>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://cagi.ch/fr/logement.php" target="_blank">cagi.ch/fr/logement.php</a></div>
-        <div class="link-desc">Service logement du Centre d’Accueil de la Genève Internationale (CAGI), soutien pour expatriés, ONG, missions internationales.</div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-magnifying-glass"></i> Immostreet</div>
+        <div class="card-desc">Moteur de recherche immobilier suisse, annonces de particuliers et d’agences à Genève et en Suisse.</div>
+        <div class="card-link"><a href="https://immostreet.ch/fr" target="_blank">immostreet.ch/fr</a></div>
       </div>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://flatfox.ch" target="_blank">flatfox.ch</a></div>
-        <div class="link-desc">Plateforme innovante pour la location, gestion des candidatures et organisation des visites en ligne.</div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-magnifying-glass"></i> Immoscout24</div>
+        <div class="card-desc">Leader suisse des portails immobiliers, moteur de recherche puissant, alertes personnalisées.</div>
+        <div class="card-link"><a href="https://immoscout24.ch" target="_blank">immoscout24.ch</a></div>
       </div>
-      <div class="link-card">
-        <div class="link-title"><a class="link-url" href="https://fr.comparis.ch/immobilien/default" target="_blank">fr.comparis.ch/immobilien/default</a></div>
-        <div class="link-desc">Comparateur d’offres immobilières issues de plusieurs portails suisses, pour optimiser sa recherche à Genève.</div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-magnifying-glass"></i> Homegate</div>
+        <div class="card-desc">Portail suisse majeur, partenaire de nombreuses agences, annonces actualisées quotidiennement.</div>
+        <div class="card-link"><a href="https://homegate.ch" target="_blank">homegate.ch</a></div>
       </div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-magnifying-glass"></i> Home.ch</div>
+        <div class="card-desc">Moteur de recherche immobilier suisse, interface simple, annonces de location et de vente.</div>
+        <div class="card-link"><a href="https://home.ch" target="_blank">home.ch</a></div>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-globe"></i> CAGI</div>
+        <div class="card-desc">Service logement du Centre d’Accueil de la Genève Internationale (CAGI), soutien pour expatriés, ONG, missions internationales.</div>
+        <div class="card-link"><a href="https://cagi.ch/fr/logement.php" target="_blank">cagi.ch/fr/logement.php</a></div>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-magnifying-glass"></i> Flatfox</div>
+        <div class="card-desc">Plateforme innovante pour la location, gestion des candidatures et organisation des visites en ligne.</div>
+        <div class="card-link"><a href="https://flatfox.ch" target="_blank">flatfox.ch</a></div>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-magnifying-glass"></i> Comparis</div>
+        <div class="card-desc">Comparateur d’offres immobilières issues de plusieurs portails suisses, pour optimiser sa recherche à Genève.</div>
+        <div class="card-link"><a href="https://fr.comparis.ch/immobilien/default" target="_blank">comparis.ch</a></div>
+      </div>
+    </div>
+
+    <div class="market">
+      <b>Tendances 2025 :</b>
+      <ul>
+        <li>Le marché reste tendu, taux de vacance <b>0,46%</b> à Genève[8][9].</li>
+        <li>Les loyers continuent d’augmenter mais plus modérément (+1,9% prévu en 2025)[6][7].</li>
+        <li>Les quartiers les plus abordables : Charmilles, Délices, Saint-Jean, Plainpalais, Pâquis.</li>
+        <li>Pour acheter : baisse modérée des prix dans certains quartiers, opportunités à saisir[17][18].</li>
+      </ul>
+      <p>
+        <b>Astuce :</b> Consultez plusieurs plateformes, activez les alertes email et n’hésitez pas à visiter avec un dossier prêt. Pour les expatriés, privilégiez les services CAGI et les fondations publiques. Les agences de relocation peuvent accélérer la recherche.
+      </p>
+    </div>
+
+    <div class="tips">
+      <b>Pour aller plus loin :</b>
+      <ul>
+        <li><a href="https://relocation-genevoise.ch/fr/blog/comment-trouver-un-appartement-a-louer-a-geneve-astuces-pour-une-recherche-efficace" target="_blank">Astuces pour une recherche efficace à Genève</a></li>
+        <li><a href="https://www.spg.ch/actualites/immobilier-suisse-en-2025-tendances-et-opportunites/" target="_blank">Tendances immobilières 2025 (SPG)</a></li>
+        <li><a href="https://neho.ch/fr/prix-m2-geneve" target="_blank">Prix au m2 à Genève (Neho)</a></li>
+        <li><a href="https://www.les-regies-a-geneve.ch" target="_blank">Annuaire complet des régies genevoises</a></li>
+      </ul>
     </div>
   </div>
 </body>
