@@ -1,81 +1,260 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Tinnitus Phase Cancellation Generator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Tinnitus Management System</title>
     <style>
-        .container { padding: 20px; max-width: 600px; margin: 0 auto; }
-        .slider-container { margin: 20px 0; }
-        label { display: block; margin-bottom: 10px; }
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f0f4f8;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .control-group {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        canvas {
+            border: 1px solid #ddd;
+            margin: 20px 0;
+        }
+
+        button {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .warning {
+            color: #c0392b;
+            font-size: 0.9em;
+            margin: 15px 0;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Audio Phase Inversion Generator</h1>
-        
-        <div class="slider-container">
-            <label>Frequency (Hz): <span id="freqValue">440</span></label>
-            <input type="range" id="freqSlider" min="20" max="20000" value="440" step="1">
+        <h1>Advanced Tinnitus Management Interface</h1>
+        <div class="warning">
+            ⚠️ Use under audiological supervision | Max 1 hour continuous use | Keep volume below 60dB
         </div>
 
-        <div class="slider-container">
-            <label>Volume: <span id="volValue">50</span>%</label>
-            <input type="range" id="volSlider" min="0" max="100" value="50">
+        <div class="grid">
+            <div class="control-group">
+                <h3>Core Parameters</h3>
+                <label>Base Frequency: <span id="baseFreq">4000</span>Hz</label>
+                <input type="range" id="baseFreqSlider" min="125" max="12000" value="4000" step="1">
+                
+                <label>Volume: <span id="volumeValue">50</span>%</label>
+                <input type="range" id="volumeSlider" min="0" max="100" value="50">
+            </div>
+
+            <div class="control-group">
+                <h3>Modulation</h3>
+                <label>Modulation Rate: <span id="modRate">40</span>Hz</label>
+                <input type="range" id="modRateSlider" min="0.1" max="100" value="40" step="0.1">
+                
+                <label>Modulation Depth: <span id="modDepth">30</span>%</label>
+                <input type="range" id="modDepthSlider" min="0" max="100" value="30">
+            </div>
         </div>
 
-        <button id="phaseToggle">Phase: Normal</button>
-        <button id="startStop">Start</button>
+        <div class="grid">
+            <div class="control-group">
+                <h3>Therapy Presets</h3>
+                <button onclick="setPreset('acute')">Acute Phase</button>
+                <button onclick="setPreset('maintenance')">Maintenance</button>
+                <button onclick="setPreset('cortical')">Cortical Reset</button>
+            </div>
+
+            <div class="control-group">
+                <h3>Advanced Filters</h3>
+                <label>Notch Q Factor: <span id="notchQ">10</span></label>
+                <input type="range" id="notchQSlider" min="1" max="30" value="10">
+                
+                <label><input type="checkbox" id="binauralToggle"> Binaural Beats</label>
+            </div>
+        </div>
+
+        <canvas id="visualizer" width="800" height="200"></canvas>
     </div>
 
     <script>
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        let oscillator = null;
+        let mainOscillator = null;
         let gainNode = audioContext.createGain();
-        let phaseInvert = 1;
+        let analyser = audioContext.createAnalyser();
+        let notchFilter = audioContext.createBiquadFilter();
+        let modOscillator = null;
 
-        // Initialize nodes
-        gainNode.connect(audioContext.destination);
-        gainNode.gain.value = 0.5;
+        // Initialize audio chain
+        function initAudioNodes() {
+            notchFilter.type = "notch";
+            notchFilter.Q.value = 10;
+            notchFilter.frequency.value = 4000;
 
-        // Frequency control
-        document.getElementById('freqSlider').addEventListener('input', function(e) {
+            gainNode.connect(notchFilter);
+            notchFilter.connect(analyser);
+            analyser.connect(audioContext.destination);
+        }
+
+        // Visualizer setup
+        const canvas = document.getElementById('visualizer');
+        const ctx = canvas.getContext('2d');
+        analyser.fftSize = 2048;
+        const bufferLength = analyser.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
+
+        function drawVisualizer() {
+            requestAnimationFrame(drawVisualizer);
+            analyser.getByteTimeDomainData(dataArray);
+            
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.beginPath();
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = var(--secondary);
+            
+            const sliceWidth = canvas.width / bufferLength;
+            let x = 0;
+
+            for(let i = 0; i < bufferLength; i++) {
+                const v = dataArray[i] / 128.0;
+                const y = v * canvas.height/2;
+
+                if(i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+
+                x += sliceWidth;
+            }
+
+            ctx.stroke();
+        }
+
+        // Control handlers
+        document.getElementById('baseFreqSlider').addEventListener('input', function(e) {
             const freq = parseInt(e.target.value);
-            document.getElementById('freqValue').textContent = freq;
-            if (oscillator) oscillator.frequency.setValueAtTime(freq, audioContext.currentTime);
+            document.getElementById('baseFreq').textContent = freq;
+            notchFilter.frequency.value = freq;
+            if(mainOscillator) mainOscillator.frequency.setValueAtTime(freq, audioContext.currentTime);
         });
 
-        // Volume control
-        document.getElementById('volSlider').addEventListener('input', function(e) {
+        document.getElementById('volumeSlider').addEventListener('input', function(e) {
             const vol = e.target.value / 100;
-            document.getElementById('volValue').textContent = e.target.value;
+            document.getElementById('volumeValue').textContent = e.target.value;
             gainNode.gain.setValueAtTime(vol, audioContext.currentTime);
         });
 
-        // Phase inversion
-        document.getElementById('phaseToggle').addEventListener('click', function() {
-            phaseInvert *= -1;
-            this.textContent = `Phase: ${phaseInvert === 1 ? 'Normal' : 'Inverted'}`;
-            if (oscillator) oscillator.detune.setValueAtTime(phaseInvert === -1 ? 180 : 0, audioContext.currentTime);
+        document.getElementById('modRateSlider').addEventListener('input', function(e) {
+            const rate = parseFloat(e.target.value);
+            document.getElementById('modRate').textContent = rate;
+            if(modOscillator) modOscillator.frequency.setValueAtTime(rate, audioContext.currentTime);
         });
 
-        // Start/Stop
-        document.getElementById('startStop').addEventListener('click', function() {
-            if (!oscillator) {
-                oscillator = audioContext.createOscillator();
-                oscillator.type = 'sine';
-                oscillator.frequency.setValueAtTime(
-                    document.getElementById('freqSlider').value,
-                    audioContext.currentTime
-                );
-                oscillator.detune.setValueAtTime(phaseInvert === -1 ? 180 : 0, audioContext.currentTime);
-                oscillator.connect(gainNode);
-                oscillator.start();
-                this.textContent = 'Stop';
-            } else {
-                oscillator.stop();
-                oscillator = null;
-                this.textContent = 'Start';
+        // Preset configurations
+        const presets = {
+            acute: {
+                baseFreq: 4000,
+                modRate: 40,
+                modDepth: 30,
+                notchQ: 10
+            },
+            maintenance: {
+                baseFreq: 4000,
+                modRate: 10,
+                modDepth: 15,
+                notchQ: 5
+            },
+            cortical: {
+                baseFreq: 4000,
+                modRate: 4,
+                modDepth: 80,
+                notchQ: 20
             }
-        });
+        };
+
+        function setPreset(presetKey) {
+            const preset = presets[presetKey];
+            Object.keys(preset).forEach(key => {
+                document.getElementById(`${key}Slider`).value = preset[key];
+                document.getElementById(`${key}Slider`).dispatchEvent(new Event('input'));
+            });
+        }
+
+        // Audio control
+        function toggleAudio() {
+            if(!mainOscillator) {
+                initAudioNodes();
+                
+                mainOscillator = audioContext.createOscillator();
+                mainOscillator.type = 'sine';
+                mainOscillator.frequency.value = 4000;
+                
+                modOscillator = audioContext.createOscillator();
+                modOscillator.type = 'sine';
+                modOscillator.frequency.value = 40;
+                
+                const modGain = audioContext.createGain();
+                modGain.gain.value = 0.3;
+                
+                modOscillator.connect(modGain);
+                modGain.connect(mainOscillator.frequency);
+                
+                mainOscillator.connect(gainNode);
+                modOscillator.start();
+                mainOscillator.start();
+                
+                drawVisualizer();
+            } else {
+                mainOscillator.stop();
+                modOscillator.stop();
+                mainOscillator = null;
+                modOscillator = null;
+            }
+        }
+
+        // Initialize
+        document.querySelector('button').addEventListener('click', toggleAudio);
+        initAudioNodes();
     </script>
 </body>
 </html>
