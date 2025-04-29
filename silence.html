@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tinnitus Phase Cancellation Generator</title>
+    <style>
+        .container { padding: 20px; max-width: 600px; margin: 0 auto; }
+        .slider-container { margin: 20px 0; }
+        label { display: block; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Audio Phase Inversion Generator</h1>
+        
+        <div class="slider-container">
+            <label>Frequency (Hz): <span id="freqValue">440</span></label>
+            <input type="range" id="freqSlider" min="20" max="20000" value="440" step="1">
+        </div>
+
+        <div class="slider-container">
+            <label>Volume: <span id="volValue">50</span>%</label>
+            <input type="range" id="volSlider" min="0" max="100" value="50">
+        </div>
+
+        <button id="phaseToggle">Phase: Normal</button>
+        <button id="startStop">Start</button>
+    </div>
+
+    <script>
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        let oscillator = null;
+        let gainNode = audioContext.createGain();
+        let phaseInvert = 1;
+
+        // Initialize nodes
+        gainNode.connect(audioContext.destination);
+        gainNode.gain.value = 0.5;
+
+        // Frequency control
+        document.getElementById('freqSlider').addEventListener('input', function(e) {
+            const freq = parseInt(e.target.value);
+            document.getElementById('freqValue').textContent = freq;
+            if (oscillator) oscillator.frequency.setValueAtTime(freq, audioContext.currentTime);
+        });
+
+        // Volume control
+        document.getElementById('volSlider').addEventListener('input', function(e) {
+            const vol = e.target.value / 100;
+            document.getElementById('volValue').textContent = e.target.value;
+            gainNode.gain.setValueAtTime(vol, audioContext.currentTime);
+        });
+
+        // Phase inversion
+        document.getElementById('phaseToggle').addEventListener('click', function() {
+            phaseInvert *= -1;
+            this.textContent = `Phase: ${phaseInvert === 1 ? 'Normal' : 'Inverted'}`;
+            if (oscillator) oscillator.detune.setValueAtTime(phaseInvert === -1 ? 180 : 0, audioContext.currentTime);
+        });
+
+        // Start/Stop
+        document.getElementById('startStop').addEventListener('click', function() {
+            if (!oscillator) {
+                oscillator = audioContext.createOscillator();
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(
+                    document.getElementById('freqSlider').value,
+                    audioContext.currentTime
+                );
+                oscillator.detune.setValueAtTime(phaseInvert === -1 ? 180 : 0, audioContext.currentTime);
+                oscillator.connect(gainNode);
+                oscillator.start();
+                this.textContent = 'Stop';
+            } else {
+                oscillator.stop();
+                oscillator = null;
+                this.textContent = 'Start';
+            }
+        });
+    </script>
+</body>
+</html>
