@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculateur de Budget</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        label {
+            font-weight: 500;
+            color: #34495e;
+        }
+
+        input {
+            padding: 8px;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .resultat {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .negative {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculateur de Budget</h1>
+        
+        <!-- Section Dépenses -->
+        <h2>Dépenses (CHF)</h2>
+        <div class="grid">
+            <div>Catégorie</div>
+            <div>Mensuel</div>
+            <div>Annuel</div>
+
+            <!-- Exemple de lignes de dépenses -->
+            <div>Loyer/hypothèque</div>
+            <input type="number" id="loyer_m" class="mensuel">
+            <input type="number" id="loyer_a" class="annuel">
+
+            <div>Assurance maladie</div>
+            <input type="number" id="assurance_m" class="mensuel">
+            <input type="number" id="assurance_a" class="annuel">
+
+            <!-- Ajouter d'autres catégories ici -->
+        </div>
+
+        <!-- Section Revenus -->
+        <h2>Revenus (CHF)</h2>
+        <div class="grid">
+            <div>Catégorie</div>
+            <div>Mensuel</div>
+            <div>Annuel</div>
+
+            <div>Salaire</div>
+            <input type="number" id="salaire_m" class="mensuel">
+            <input type="number" id="salaire_a" class="annuel">
+
+            <div>Rendements</div>
+            <input type="number" id="rendements_m" class="mensuel">
+            <input type="number" id="rendements_a" class="annuel">
+
+            <!-- Ajouter d'autres catégories ici -->
+        </div>
+
+        <div class="resultat">
+            <h3>Résultats</h3>
+            <p>Total Dépenses mensuelles: <span id="total_depenses_m">0</span> CHF</p>
+            <p>Total Revenus mensuels: <span id="total_revenus_m">0</span> CHF</p>
+            <p>Différence mensuelle: <span id="difference_m">0</span> CHF (<span id="pourcentage_m">0</span>%)</p>
+            
+            <p>Total Dépenses annuelles: <span id="total_depenses_a">0</span> CHF</p>
+            <p>Total Revenus annuels: <span id="total_revenus_a">0</span> CHF</p>
+            <p>Différence annuelle: <span id="difference_a">0</span> CHF (<span id="pourcentage_a">0</span>%)</p>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', calculerTotaux);
+        });
+
+        function calculerTotaux() {
+            let totalDepensesM = 0;
+            let totalRevenusM = 0;
+            
+            // Calcul des totaux mensuels
+            document.querySelectorAll('.mensuel').forEach(input => {
+                const value = parseFloat(input.value) || 0;
+                if(input.closest('h2').previousElementSibling.textContent.includes('Dépenses')) {
+                    totalDepensesM += value;
+                } else {
+                    totalRevenusM += value;
+                }
+            });
+
+            // Calcul des totaux annuels
+            const totalDepensesA = totalDepensesM * 12;
+            const totalRevenusA = totalRevenusM * 12;
+
+            // Mise à jour des affichages
+            document.getElementById('total_depenses_m').textContent = totalDepensesM.toFixed(2);
+            document.getElementById('total_revenus_m').textContent = totalRevenusM.toFixed(2);
+            
+            document.getElementById('total_depenses_a').textContent = totalDepensesA.toFixed(2);
+            document.getElementById('total_revenus_a').textContent = totalRevenusA.toFixed(2);
+
+            // Calcul des différences
+            const differenceM = totalRevenusM - totalDepensesM;
+            const differenceA = totalRevenusA - totalDepensesA;
+            
+            const pourcentageM = totalRevenusM ? (differenceM / totalRevenusM * 100).toFixed(1) : 0;
+            const pourcentageA = totalRevenusA ? (differenceA / totalRevenusA * 100).toFixed(1) : 0;
+
+            // Mise en forme des résultats
+            mettreAJourStyle('difference_m', differenceM);
+            mettreAJourStyle('difference_a', differenceA);
+            
+            document.getElementById('difference_m').textContent = differenceM.toFixed(2);
+            document.getElementById('pourcentage_m').textContent = pourcentageM;
+            
+            document.getElementById('difference_a').textContent = differenceA.toFixed(2);
+            document.getElementById('pourcentage_a').textContent = pourcentageA;
+        }
+
+        function mettreAJourStyle(elementId, valeur) {
+            const element = document.getElementById(elementId);
+            element.classList.toggle('negative', valeur < 0);
+        }
+    </script>
+</body>
+</html>
