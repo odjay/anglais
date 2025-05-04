@@ -4,81 +4,23 @@
     <meta charset="UTF-8">
     <title>Fiche Budget Suisse</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: #f4f6fa;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 950px;
-            margin: 30px auto;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-            padding: 32px 40px 40px 40px;
-        }
-        h1, h2 {
-            color: #2c3e50;
-            margin-bottom: 8px;
-        }
-        h2 {
-            margin-top: 32px;
-            border-bottom: 1px solid #e1e5eb;
-            padding-bottom: 4px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 24px;
-        }
-        th, td {
-            padding: 8px 6px;
-            text-align: left;
-        }
-        th {
-            background: #e9eef4;
-        }
-        tr:nth-child(even) td {
-            background: #f8fafc;
-        }
-        .total, .result {
-            font-weight: bold;
-            background: #e9eef4;
-        }
-        .negative {
-            color: #e74c3c;
-        }
-        input[type="number"] {
-            width: 90px;
-            padding: 4px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-        .section-title {
-            font-weight: bold;
-            background: #dbeafe;
-        }
-        .small {
-            font-size: 0.95em;
-            color: #666;
-        }
-        .flex-row {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 12px;
-        }
-        .flex-row label {
-            min-width: 120px;
-        }
-        textarea {
-            width: 100%;
-            min-height: 60px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            padding: 6px;
-            font-size: 1em;
-        }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6fa; margin: 0; padding: 0; }
+        .container { max-width: 950px; margin: 30px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); padding: 32px 40px 40px 40px; }
+        h1, h2 { color: #2c3e50; margin-bottom: 8px; }
+        h2 { margin-top: 32px; border-bottom: 1px solid #e1e5eb; padding-bottom: 4px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+        th, td { padding: 8px 6px; text-align: left; }
+        th { background: #e9eef4; }
+        tr:nth-child(even) td { background: #f8fafc; }
+        .total, .result { font-weight: bold; background: #e9eef4; }
+        .negative { color: #e74c3c; }
+        input[type="number"] { width: 90px; padding: 4px; border: 1px solid #ccc; border-radius: 3px; }
+        .section-title { font-weight: bold; background: #dbeafe; }
+        .small { font-size: 0.95em; color: #666; }
+        .flex-row { display: flex; gap: 16px; margin-bottom: 12px; }
+        .flex-row label { min-width: 120px; }
+        textarea { width: 100%; min-height: 60px; border-radius: 4px; border: 1px solid #ccc; padding: 6px; font-size: 1em; }
+        #exportBtn { margin: 16px 0 0 0; float: right; }
     </style>
 </head>
 <body>
@@ -118,175 +60,175 @@
         <tr class="section-title"><td colspan="3">Impôts</td></tr>
         <tr>
             <td>Impôts cantonaux et communaux (y c. impôt ecclésiastique)</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="impots_cantonal"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="impots_cantonal"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Impôt fédéral direct</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="impots_federal"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="impots_federal"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr class="section-title"><td colspan="3">Logement</td></tr>
         <tr>
             <td>Loyer/hypothèque</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="loyer"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="loyer"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Entretien / réparations</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="entretien"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="entretien"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Charges (électricité, eau, chauffage)</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="charges"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="charges"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Internet, télévision, téléphone, mobile</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="internet"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="internet"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr class="section-title"><td colspan="3">Ménage</td></tr>
         <tr>
             <td>Alimentation, boissons</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="alimentation"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="alimentation"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Repas pris à l'extérieur</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="repas_exterieur"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="repas_exterieur"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Vêtements</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="vetements"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="vetements"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Hygiène et cosmétiques</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="hygiene"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="hygiene"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Journaux, magazines, abonnements en ligne</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="journaux"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="journaux"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Divers (p. ex. animaux domestiques)</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="divers_menage"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="divers_menage"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr class="section-title"><td colspan="3">Assurances</td></tr>
         <tr>
             <td>Assurance maladie, accidents</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="assurance_maladie"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="assurance_maladie"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Assurance véhicules à moteur</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="assurance_vehicule"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="assurance_vehicule"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Assurance ménage / responsabilité civile</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="assurance_menage"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="assurance_menage"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Autres assurances (p. ex. pilier 3a)</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="autres_assurances"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="autres_assurances"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr class="section-title"><td colspan="3">Santé</td></tr>
         <tr>
             <td>Médecin, dentiste, soin</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="medecin"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="medecin"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Médicaments et aides médicales</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="medicaments"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="medicaments"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Opticien</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="opticien"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="opticien"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr class="section-title"><td colspan="3">Transports</td></tr>
         <tr>
             <td>Transports publics</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="transports_publics"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="transports_publics"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Voiture, motocycle, bicyclette (entretien)</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="vehicule_entretien"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="vehicule_entretien"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Carburant</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="carburant"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="carburant"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Taxes (y c. leasing) et impôts</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="taxes"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="taxes"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr class="section-title"><td colspan="3">Loisirs</td></tr>
         <tr>
             <td>Hobbies</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="hobbies"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="hobbies"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Sorties et excursions</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="sorties"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="sorties"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Livres / formation continue</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="livres"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="livres"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Vacances / voyages</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="vacances"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="vacances"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr class="section-title"><td colspan="3">Divers</td></tr>
         <tr>
             <td>Cotisations des membres</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="cotisations"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="cotisations"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Cadeaux et dons</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="cadeaux"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="cadeaux"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Provisions pour achats (voiture, mobilier)</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="provisions"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="provisions"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Éducation / soutien d'enfants</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="education"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="education"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Pensions alimentaires</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="pensions"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="pensions"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr>
             <td>Autres dépenses</td>
-            <td><input type="number" min="0" step="0.01" class="depense-m" data-cat="autres_depenses"></td>
-            <td><input type="number" min="0" step="0.01" class="depense-a" data-cat="autres_depenses"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-m"></td>
+            <td><input type="number" min="0" step="0.01" class="depense-a"></td>
         </tr>
         <tr class="total">
             <td>Total Dépenses</td>
@@ -308,38 +250,38 @@
         <tbody>
         <tr>
             <td>Revenu de l'activité lucrative</td>
-            <td><input type="number" min="0" step="0.01" class="revenu-m" data-cat="revenu_activite"></td>
-            <td><input type="number" min="0" step="0.01" class="revenu-a" data-cat="revenu_activite"></td>
+            <td><input type="number" min="0" step="0.01" class="revenu-m"></td>
+            <td><input type="number" min="0" step="0.01" class="revenu-a"></td>
         </tr>
         <tr>
             <td>Rente AVS</td>
-            <td><input type="number" min="0" step="0.01" class="revenu-m" data-cat="rente_avs"></td>
-            <td><input type="number" min="0" step="0.01" class="revenu-a" data-cat="rente_avs"></td>
+            <td><input type="number" min="0" step="0.01" class="revenu-m"></td>
+            <td><input type="number" min="0" step="0.01" class="revenu-a"></td>
         </tr>
         <tr>
             <td>Rente de la caisse de pension</td>
-            <td><input type="number" min="0" step="0.01" class="revenu-m" data-cat="rente_caisse"></td>
-            <td><input type="number" min="0" step="0.01" class="revenu-a" data-cat="rente_caisse"></td>
+            <td><input type="number" min="0" step="0.01" class="revenu-m"></td>
+            <td><input type="number" min="0" step="0.01" class="revenu-a"></td>
         </tr>
         <tr>
             <td>Rente privée</td>
-            <td><input type="number" min="0" step="0.01" class="revenu-m" data-cat="rente_privee"></td>
-            <td><input type="number" min="0" step="0.01" class="revenu-a" data-cat="rente_privee"></td>
+            <td><input type="number" min="0" step="0.01" class="revenu-m"></td>
+            <td><input type="number" min="0" step="0.01" class="revenu-a"></td>
         </tr>
         <tr>
             <td>Rendements des titres</td>
-            <td><input type="number" min="0" step="0.01" class="revenu-m" data-cat="rendements"></td>
-            <td><input type="number" min="0" step="0.01" class="revenu-a" data-cat="rendements"></td>
+            <td><input type="number" min="0" step="0.01" class="revenu-m"></td>
+            <td><input type="number" min="0" step="0.01" class="revenu-a"></td>
         </tr>
         <tr>
             <td>Revenus immobiliers</td>
-            <td><input type="number" min="0" step="0.01" class="revenu-m" data-cat="revenus_immobiliers"></td>
-            <td><input type="number" min="0" step="0.01" class="revenu-a" data-cat="revenus_immobiliers"></td>
+            <td><input type="number" min="0" step="0.01" class="revenu-m"></td>
+            <td><input type="number" min="0" step="0.01" class="revenu-a"></td>
         </tr>
         <tr>
             <td>Autres revenus</td>
-            <td><input type="number" min="0" step="0.01" class="revenu-m" data-cat="autres_revenus"></td>
-            <td><input type="number" min="0" step="0.01" class="revenu-a" data-cat="autres_revenus"></td>
+            <td><input type="number" min="0" step="0.01" class="revenu-m"></td>
+            <td><input type="number" min="0" step="0.01" class="revenu-a"></td>
         </tr>
         <tr class="total">
             <td>Total Revenus</td>
@@ -383,6 +325,8 @@
     </table>
     </form>
 
+    <button id="exportBtn">Exporter en Excel</button>
+
     <h2>Conseiller / Conseillère</h2>
     <div class="flex-row">
         <label for="conseiller_nom">Nom :</label>
@@ -395,73 +339,140 @@
 </div>
 
 <script>
-    // Calculs automatiques
-    function somme(inputs) {
-        let total = 0;
-        inputs.forEach(inp => {
-            const val = parseFloat(inp.value) || 0;
-            total += val;
-        });
-        return total;
-    }
+function somme(inputs) {
+    let total = 0;
+    inputs.forEach(inp => {
+        const val = parseFloat(inp.value) || 0;
+        total += val;
+    });
+    return total;
+}
 
-    function updateBudget() {
-        // Dépenses
-        const depM = document.querySelectorAll('.depense-m');
-        const depA = document.querySelectorAll('.depense-a');
-        const totalDepM = somme(depM);
-        const totalDepA = somme(depA);
+function updateBudget() {
+    // Dépenses
+    const depM = document.querySelectorAll('.depense-m');
+    const depA = document.querySelectorAll('.depense-a');
+    const totalDepM = somme(depM);
+    const totalDepA = somme(depA);
+    document.getElementById('total_depenses_m').textContent = totalDepM.toFixed(2);
+    document.getElementById('total_depenses_a').textContent = totalDepA.toFixed(2);
+    document.getElementById('depenses_total_m').textContent = totalDepM.toFixed(2);
+    document.getElementById('depenses_total_a').textContent = totalDepA.toFixed(2);
 
-        document.getElementById('total_depenses_m').textContent = totalDepM.toFixed(2);
-        document.getElementById('total_depenses_a').textContent = totalDepA.toFixed(2);
+    // Revenus
+    const revM = document.querySelectorAll('.revenu-m');
+    const revA = document.querySelectorAll('.revenu-a');
+    const totalRevM = somme(revM);
+    const totalRevA = somme(revA);
+    document.getElementById('total_revenus_m').textContent = totalRevM.toFixed(2);
+    document.getElementById('total_revenus_a').textContent = totalRevA.toFixed(2);
+    document.getElementById('revenu_total_m').textContent = totalRevM.toFixed(2);
+    document.getElementById('revenu_total_a').textContent = totalRevA.toFixed(2);
 
-        document.getElementById('depenses_total_m').textContent = totalDepM.toFixed(2);
-        document.getElementById('depenses_total_a').textContent = totalDepA.toFixed(2);
+    // Différences
+    const diffM = totalRevM - totalDepM;
+    const diffA = totalRevA - totalDepA;
+    document.getElementById('diff_m').textContent = diffM.toFixed(2);
+    document.getElementById('diff_a').textContent = diffA.toFixed(2);
 
-        // Revenus
-        const revM = document.querySelectorAll('.revenu-m');
-        const revA = document.querySelectorAll('.revenu-a');
-        const totalRevM = somme(revM);
-        const totalRevA = somme(revA);
+    // Pourcentage
+    const pcM = totalRevM > 0 ? (diffM / totalRevM * 100).toFixed(1) : 0;
+    const pcA = totalRevA > 0 ? (diffA / totalRevA * 100).toFixed(1) : 0;
+    document.getElementById('diff_pc_m').textContent = pcM + "%";
+    document.getElementById('diff_pc_a').textContent = pcA + "%";
 
-        document.getElementById('total_revenus_m').textContent = totalRevM.toFixed(2);
-        document.getElementById('total_revenus_a').textContent = totalRevA.toFixed(2);
+    // Affichage rouge si déficit
+    ['diff_m', 'diff_a', 'diff_pc_m', 'diff_pc_a'].forEach(id => {
+        const el = document.getElementById(id);
+        if ((id === 'diff_m' && diffM < 0) || (id === 'diff_a' && diffA < 0) ||
+            (id === 'diff_pc_m' && pcM < 0) || (id === 'diff_pc_a' && pcA < 0)) {
+            el.classList.add('negative');
+        } else {
+            el.classList.remove('negative');
+        }
+    });
+}
 
-        document.getElementById('revenu_total_m').textContent = totalRevM.toFixed(2);
-        document.getElementById('revenu_total_a').textContent = totalRevA.toFixed(2);
-
-        // Différences
-        const diffM = totalRevM - totalDepM;
-        const diffA = totalRevA - totalDepA;
-
-        document.getElementById('diff_m').textContent = diffM.toFixed(2);
-        document.getElementById('diff_a').textContent = diffA.toFixed(2);
-
-        // Pourcentage
-        const pcM = totalRevM > 0 ? (diffM / totalRevM * 100).toFixed(1) : 0;
-        const pcA = totalRevA > 0 ? (diffA / totalRevA * 100).toFixed(1) : 0;
-
-        document.getElementById('diff_pc_m').textContent = pcM + "%";
-        document.getElementById('diff_pc_a').textContent = pcA + "%";
-
-        // Affichage rouge si déficit
-        ['diff_m', 'diff_a', 'diff_pc_m', 'diff_pc_a'].forEach(id => {
-            const el = document.getElementById(id);
-            if ((id === 'diff_m' && diffM < 0) || (id === 'diff_a' && diffA < 0) ||
-                (id === 'diff_pc_m' && pcM < 0) || (id === 'diff_pc_a' && pcA < 0)) {
-                el.classList.add('negative');
-            } else {
-                el.classList.remove('negative');
+// Synchronisation mensuel <-> annuel
+function syncInputs() {
+    // Dépenses
+    document.querySelectorAll('.depense-m').forEach((mensuelInput, idx) => {
+        const annuelInput = document.querySelectorAll('.depense-a')[idx];
+        mensuelInput.addEventListener('input', function() {
+            if (this === document.activeElement) {
+                annuelInput.value = this.value ? (parseFloat(this.value) * 12).toFixed(2) : '';
+                updateBudget();
             }
         });
-    }
-
-    document.querySelectorAll('input[type="number"]').forEach(inp => {
-        inp.addEventListener('input', updateBudget);
+        annuelInput.addEventListener('input', function() {
+            if (this === document.activeElement) {
+                mensuelInput.value = this.value ? (parseFloat(this.value) / 12).toFixed(2) : '';
+                updateBudget();
+            }
+        });
     });
+    // Revenus
+    document.querySelectorAll('.revenu-m').forEach((mensuelInput, idx) => {
+        const annuelInput = document.querySelectorAll('.revenu-a')[idx];
+        mensuelInput.addEventListener('input', function() {
+            if (this === document.activeElement) {
+                annuelInput.value = this.value ? (parseFloat(this.value) * 12).toFixed(2) : '';
+                updateBudget();
+            }
+        });
+        annuelInput.addEventListener('input', function() {
+            if (this === document.activeElement) {
+                mensuelInput.value = this.value ? (parseFloat(this.value) / 12).toFixed(2) : '';
+                updateBudget();
+            }
+        });
+    });
+}
+syncInputs();
 
-    // Init
-    updateBudget();
+// Mise à jour budget sur saisie
+document.querySelectorAll('input[type="number"]').forEach(inp => {
+    inp.addEventListener('input', updateBudget);
+});
+updateBudget();
+
+// Export Excel (CSV)
+document.getElementById('exportBtn').addEventListener('click', function() {
+    let csv = '';
+    // Dépenses
+    csv += 'Dépenses\nCatégorie;Mensuel (CHF);Annuel (CHF)\n';
+    document.querySelectorAll('.depense-m').forEach((inp, idx) => {
+        const row = inp.closest('tr');
+        if (row && row.querySelector('td')) {
+            const cat = row.querySelector('td').innerText.replace(/;/g, ',');
+            const mensuel = inp.value || '';
+            const annuel = document.querySelectorAll('.depense-a')[idx].value || '';
+            csv += `${cat};${mensuel};${annuel}\n`;
+        }
+    });
+    csv += '\nRevenus\nCatégorie;Mensuel (CHF);Annuel (CHF)\n';
+    document.querySelectorAll('.revenu-m').forEach((inp, idx) => {
+        const row = inp.closest('tr');
+        if (row && row.querySelector('td')) {
+            const cat = row.querySelector('td').innerText.replace(/;/g, ',');
+            const mensuel = inp.value || '';
+            const annuel = document.querySelectorAll('.revenu-a')[idx].value || '';
+            csv += `${cat};${mensuel};${annuel}\n`;
+        }
+    });
+    // Totaux
+    csv += `\nTotaux;;\nDépenses;${document.getElementById('total_depenses_m').textContent};${document.getElementById('total_depenses_a').textContent}\n`;
+    csv += `Revenus;${document.getElementById('total_revenus_m').textContent};${document.getElementById('total_revenus_a').textContent}\n`;
+
+    // Téléchargement
+    const blob = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'budget.csv';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+});
 </script>
 </body>
 </html>
